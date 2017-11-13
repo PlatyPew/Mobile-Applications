@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView_AddCustomerForm"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="fill_parent">
+        <EditText
+            android:id="@+id/EditText_Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Customer name"
+            android:textSize="10pt">
+        </EditText>
+        <EditText
+            android:id="@+id/EditText_MobileContact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mobile contact"
+            android:textSize="10pt">
+        </EditText>
+        <Button
+            android:id="@+id/Button_Save"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:layout_width="match_parent">
+        </Button>
+    </LinearLayout>
+</ScrollView>
