@@ -9,32 +9,38 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="fill_parent">
-        <EditText
+
+
+        <TextView
             android:id="@+id/EditText_Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Name"
-            android:textSize="10pt">
-        </EditText>
-        <EditText
-            android:id="@+id/EditText_desc"
+            android:textSize="20pt">
+        </TextView>
+        <TextView
+            android:id="@+id/EditText_Date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-                android:hint="Description"
-            android:textSize="10pt">
-        </EditText>
-        <EditText
-            android:id="@+id/EditText_notes"
+            android:hint="Date"
+            android:textSize="11pt">
+        </TextView>
+        <TextView
+            android:id="@+id/EditText_Desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Notes"
-            android:textSize="10pt">
-        </EditText>
-        <Button
-            android:id="@+id/Button_Save"
+            android:hint="Description"
+            android:textSize="12pt">
+        </TextView>
+        <TextView
+            android:id="@+id/EditText_note"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Save"
-            android:layout_width="match_parent">
-        </Button>
+            android:hint="Note Text"
+            android:textSize="10pt">
+        </TextView>
+
+
+
     </LinearLayout>
 </ScrollView>

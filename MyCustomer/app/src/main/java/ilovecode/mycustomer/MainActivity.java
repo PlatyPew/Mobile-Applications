@@ -13,7 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -38,49 +38,14 @@ public class MainActivity extends AppCompatActivity {
                 Customer selectedCustomerToUpdate = m_customerArrayList.get(position);
                 int id = selectedCustomerToUpdate.getId();
                 String name = selectedCustomerToUpdate.getName();
-                String contact = selectedCustomerToUpdate.getNote();
-                String desc = selectedCustomerToUpdate.getDesc();
-                String date = selectedCustomerToUpdate.getDate();
-                Intent intent=null;
-                switch(view.getId())  //get the id of the view clicked. (in this case button)
-                {
-                    case R.id.Button_view : // if its button1
-                         intent = new Intent(MainActivity.this,ViewCustomer.class);
+                String contact = selectedCustomerToUpdate.getMobileContact();
+                Intent intent = new Intent(MainActivity.this, UpdateCustomer.class);
 
-                        intent.putExtra("ID", Integer.toString(id));
-                        intent.putExtra("NAME", name);
-                        intent.putExtra("NOTE", contact);
-                        intent.putExtra("DESCRIPTION", desc);
-                        intent.putExtra("DATE", date);
+                intent.putExtra("ID", Integer.toString(id));
+                intent.putExtra("NAME", name);
+                intent.putExtra("CONTACT", contact);
 
-
-                        startActivityForResult(intent,5);
-                        break;
-                    case R.id.Button_Edit : // if its button1
-                        System.out.println("hii");
-                        intent = new Intent(MainActivity.this,UpdateCustomer.class);
-
-                        intent.putExtra("ID", Integer.toString(id));
-                        intent.putExtra("NAME", name);
-                        intent.putExtra("NOTE", contact);
-                        intent.putExtra("DESCRIPTION", desc);
-                        intent.putExtra("DATE", date);
-
-
-                        startActivityForResult(intent,5);
-                        break;
-                    case R.id.Button_Delete:
-                        System.out.println(id);
-                        DbDataSource db = new DbDataSource(view.getContext());
-                        db.open();
-                        db.deleteCustomer(id);
-                        finish();
-                        startActivity(getIntent());
-                        break;
-
-                }
-
-
+                startActivityForResult(intent,5);
             }
         };
         m_customerArrayAdapter = new CustomerArrayAdapter(R.layout.customer_list_item, m_customerArrayList,listener);
@@ -117,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
     protected void loadData(){
         Customer oneCustomer;
         //Note: the m_customerArrayList is declared as class member variable
-        //Clear the m_customerArrayList first before opening the database
+        //Clear the m_customerArrayList first before openning the database
         m_customerArrayList.clear();
         DbDataSource database = new DbDataSource(this);
         database.open();
@@ -132,10 +97,8 @@ public class MainActivity extends AppCompatActivity {
         while (!cursor.isAfterLast()) {
             int id = cursor.getInt(cursor.getColumnIndex("_ID"));
             String name = cursor.getString(cursor.getColumnIndex("NAME"));
-            String note = cursor.getString(cursor.getColumnIndex("NOTES"));
-            String desc = cursor.getString(cursor.getColumnIndex("DESC"));
-            String date = cursor.getString(cursor.getColumnIndex("DATE"));
-            oneCustomer = new Customer(id,name,note,date,desc);
+            String mobileContact = cursor.getString(cursor.getColumnIndex("MOBILE_CONTACT"));
+            oneCustomer = new Customer(id,name,mobileContact);
             m_customerArrayList.add(oneCustomer);
             cursor.moveToNext();
         }

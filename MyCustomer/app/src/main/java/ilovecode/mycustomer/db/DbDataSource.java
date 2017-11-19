@@ -5,8 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.Toast;
-
 import ilovecode.mycustomer.Customer;
 
 public class DbDataSource {
@@ -38,11 +36,9 @@ public class DbDataSource {
         try{
             ContentValues values = new ContentValues();
             values.put(DbHelper.COLUMN_NAME, customer.getName());
-            values.put(DbHelper.COLUMN_NOTES, customer.getNote());
-            values.put(DbHelper.COLUMN_DESC, customer.getDesc());
-            values.put(DbHelper.COLUMN_DATE, customer.getDate());
+            values.put(DbHelper.COLUMN_MOBILE_CONTACT, customer.getMobileContact());
 
-            m_database.insert(DbHelper.TABLE, null, values);
+            m_database.insert(DbHelper.TABLE_CUSTOMERS, null, values);
 
             m_database.setTransactionSuccessful();
         } finally {
@@ -52,26 +48,24 @@ public class DbDataSource {
 
     //select
     public Cursor selectAllCustomers(){
-        Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE, null);
+        Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE_CUSTOMERS, null);
         return cursor;
     }
 
     public Cursor selectOneCustomer(int inId){
-        Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE+" where "
+        Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE_CUSTOMERS+" where "
                 + DbHelper.COLUMN_ID+" = " + inId, null);
         return cursor;
     }
 
     //update
-    public boolean updateCustomer(int inId, String inName, String notes,String desc, String date){
+    public boolean updateCustomer(int inId, String inName, String inMobileContact){
         ContentValues values = new ContentValues();
         int success = -1;
         values.put(DbHelper.COLUMN_NAME, inName);
-        values.put(DbHelper.COLUMN_NOTES, notes);
-        values.put(DbHelper.COLUMN_DESC, desc);
-        values.put(DbHelper.COLUMN_DATE, date);
+        values.put(DbHelper.COLUMN_MOBILE_CONTACT, inMobileContact);
         success =  m_database.update(
-                DbHelper.TABLE,
+                DbHelper.TABLE_CUSTOMERS,
                 values,
                 DbHelper.COLUMN_ID + " = " + inId,
                 null
@@ -88,19 +82,10 @@ public class DbDataSource {
 
 
     //delete
-    public void delete(int id) {
-        //Open the database
-
-        //Execute sql query to remove from database
-        //NOTE: When removing by String in SQL, value must be enclosed with ''
-        m_database.execSQL("DELETE FROM " + DbHelper.TABLE + " WHERE " + DbHelper.COLUMN_ID + "= " + id + "");
-
-        //Close the database
-    }
     public boolean deleteCustomer(int inId) {
         int success = -1;
         success = m_database.delete(
-                DbHelper.TABLE,
+                DbHelper.TABLE_CUSTOMERS,
                 DbHelper.COLUMN_ID + " = " + inId,
                 null
         );
@@ -114,7 +99,7 @@ public class DbDataSource {
     public boolean deleteAllCustomers() {
         int success = -1;
         success = m_database.delete(
-                DbHelper.TABLE,
+                DbHelper.TABLE_CUSTOMERS,
                 null,
                 null
         );

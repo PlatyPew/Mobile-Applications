@@ -5,23 +5,19 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DbHelper extends SQLiteOpenHelper {
-    public static final String TABLE ="CUSTOMERS";
+    public static final String TABLE_CUSTOMERS ="CUSTOMERS";
     public static final String COLUMN_ID = "_ID";
     public static final String COLUMN_NAME = "NAME";
-    public static final String COLUMN_NOTES = "NOTES";
-    public static final String COLUMN_DESC = "DESC";
-    public static final String COLUMN_DATE = "DATE";
+    public static final String COLUMN_MOBILE_CONTACT = "MOBILE_CONTACT";
 
 
 
-    public static final String DB_NAME = "notes.db";
+    private static final String DB_NAME = "database.db";
     private static final int DB_VER = 1;
-    private static final String DB_CREATE = "CREATE TABLE "+ TABLE+
+    private static final String DB_CREATE = "CREATE TABLE "+ TABLE_CUSTOMERS+
             " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT" +
             ", " + COLUMN_NAME + " TEXT " +
-            ", " + COLUMN_NOTES + " TEXT "+
-            ", " + COLUMN_DESC + " TEXT " +
-            ", " + COLUMN_DATE + " TEXT )";
+            ", " + COLUMN_MOBILE_CONTACT + " TEXT)";
 
 
     public DbHelper(Context context){

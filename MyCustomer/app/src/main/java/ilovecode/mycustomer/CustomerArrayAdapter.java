@@ -51,24 +51,16 @@ public class CustomerArrayAdapter extends RecyclerView.Adapter<CustomerArrayAdap
         //This is where we place code so that the Android system can run them
         //to display the customer data inside each recyclerview rows.
         TextView textView_name = holder.textView_name;
-        //TextView textView_mobileContact = holder.textView_mobileContact;
-        TextView textView_desc = holder.textView_desc;
-        TextView textView_date = holder.textView_date;
-        textView_desc.setText(customerArrayList.get(listPosition).getDesc());
-        textView_date.setText(customerArrayList.get(listPosition).getDate());
+        TextView textView_mobileContact = holder.textView_mobileContact;
         textView_name.setText(customerArrayList.get(listPosition).getName());
-        //textView_mobileContact.setText(customerArrayList.get(listPosition).getNote());
+        textView_mobileContact.setText(customerArrayList.get(listPosition).getMobileContact());
     }
 
     // Static inner class to initialize the views of rows
     static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView textView_name;
-        //public TextView textView_mobileContact;
-        public TextView textView_desc;
-        public TextView textView_date;
-        public Button button_view;
+        public TextView textView_mobileContact;
         public Button button_edit;
-        public Button button_delete;
         private RecyclerViewClickListener mListener;
         public ViewHolder(View itemView, RecyclerViewClickListener listener) {
             super(itemView);
@@ -78,19 +70,10 @@ public class CustomerArrayAdapter extends RecyclerView.Adapter<CustomerArrayAdap
             //button_edit to reference the elements which are defined the the XML in
             //the customer_liest_item.xml.
             textView_name = (TextView) itemView.findViewById(R.id.TextView_Name);
-            //textView_mobileContact = (TextView) itemView.findViewById(R.id.TextView_MobileContact);
-            textView_desc = (TextView) itemView.findViewById(R.id.TextView_desc);
-            textView_date = (TextView) itemView.findViewById(R.id.TextView_date);
-
-            button_view = (Button) itemView.findViewById(R.id.Button_view);
+            textView_mobileContact = (TextView) itemView.findViewById(R.id.TextView_MobileContact);
             button_edit = (Button) itemView.findViewById(R.id.Button_Edit);
-            button_delete = (Button) itemView.findViewById(R.id.Button_Delete);
-
             //Defined a click listener only for the button which has the edit icon
-            button_view.setOnClickListener(this);
             button_edit.setOnClickListener(this);
-            button_delete.setOnClickListener(this);
-
         }
         @Override
         public void onClick(View view) {

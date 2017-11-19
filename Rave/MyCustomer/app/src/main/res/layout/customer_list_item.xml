@@ -22,16 +22,24 @@
 
     <Button
         android:id="@+id/Button_Edit"
-        android:layout_width="35dp"
-        android:layout_height="30dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_gravity="right"
-        android:drawableRight="@drawable/ic_border_color_black_24dp"
+        android:drawableRight="@android:drawable/ic_menu_edit"
+        android:padding="2dp"></Button>
+
+    <Button
+        android:id="@+id/Button_Delete"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="right"
+        android:drawableRight="@android:drawable/ic_menu_delete"
         android:padding="2dp"></Button>
 
     <Button
         android:id="@+id/Button_view"
-        android:layout_width="35dp"
-        android:layout_height="30dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_gravity="right"
         android:drawableRight="@android:drawable/ic_menu_view"
 
