@@ -39,9 +39,9 @@ public class AddCustomer extends AppCompatActivity {
                 String desc = descc.getText().toString();
 
                 //EditText datee= (EditText)findViewById(R.id.EditText_Date);
-                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
                 Date datee = new Date();
-                String date = dateFormat.format(datee);
+                String date = "Created on: "+dateFormat.format(datee);
 
 
                 DbDataSource db = new DbDataSource(v.getContext());

@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerViewClickListener listener = new RecyclerViewClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Toast.makeText(view.getContext(), "You have selected position " + position, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(view.getContext(), "You have selected position " + position, Toast.LENGTH_SHORT).show();
                 Customer selectedCustomerToUpdate = m_customerArrayList.get(position);
                 int id = selectedCustomerToUpdate.getId();
                 String name = selectedCustomerToUpdate.getName();
@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
                         startActivityForResult(intent,5);
                         break;
                     case R.id.Button_Edit : // if its button1
-                        System.out.println("hii");
                         intent = new Intent(MainActivity.this,UpdateCustomer.class);
 
                         intent.putExtra("ID", Integer.toString(id));
@@ -70,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
                         startActivityForResult(intent,5);
                         break;
                     case R.id.Button_Delete:
-                        System.out.println(id);
                         DbDataSource db = new DbDataSource(view.getContext());
                         db.open();
                         db.deleteCustomer(id);

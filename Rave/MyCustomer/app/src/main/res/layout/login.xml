@@ -13,16 +13,16 @@
             android:id="@+id/EditText_Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Customer name"
+            android:hint="Name"
             android:textSize="10pt">
         </EditText>
+
         <EditText
-            android:id="@+id/EditText_MobileContact"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Mobile contact"
-            android:textSize="10pt">
-        </EditText>
+            android:ems="10"
+            android:inputType="textPassword" />
+
         <Button
             android:id="@+id/Button_Save"
             android:layout_height="wrap_content"

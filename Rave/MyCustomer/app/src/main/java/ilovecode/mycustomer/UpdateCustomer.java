@@ -10,6 +10,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import ilovecode.mycustomer.db.DbDataSource;
 
 public class UpdateCustomer extends AppCompatActivity {
@@ -69,13 +73,15 @@ public class UpdateCustomer extends AppCompatActivity {
                 String descee = descc.getText().toString();
 
                 //EditText datee= (EditText)findViewById(R.id.EditText_Date);
-
+                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+                Date datee = new Date();
+                String dates = "Last edited on: "+dateFormat.format(datee);
 
 
                 DbDataSource db = new DbDataSource(v.getContext());
 
                 db.open();
-                db.updateCustomer(id,nameee,noteee,descee,date);
+                db.updateCustomer(id,nameee,noteee,descee,dates);
                 Toast.makeText(v.getContext(), "edited one note", Toast.LENGTH_SHORT).show();
                 db.close();
 
