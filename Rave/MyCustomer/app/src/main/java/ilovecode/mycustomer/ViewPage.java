@@ -20,10 +20,10 @@ import java.util.ArrayList;
 
 import ilovecode.mycustomer.db.DbDataSource;
 
-public class MainPage extends AppCompatActivity {
+public class ViewPage extends AppCompatActivity {
     public static ArrayList<Customer> m_customerArrayList;
     RecyclerView m_recyclerView;
-    public static CustomerArrayAdapter m_customerArrayAdapter;
+    public static ViewArrayAdapter m_customerArrayAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +47,7 @@ public class MainPage extends AppCompatActivity {
                 switch(view.getId())  //get the id of the view clicked. (in this case button)
                 {
                     case R.id.Button_view : // if its button1
-                         intent = new Intent(MainPage.this,ViewCustomer.class);
+                         intent = new Intent(ViewPage.this,ViewCustomer.class);
 
                         intent.putExtra("ID", Integer.toString(id));
                         intent.putExtra("NAME", name);
@@ -59,32 +59,14 @@ public class MainPage extends AppCompatActivity {
 
                         startActivityForResult(intent,5);
                         break;
-                    case R.id.Button_Edit : // if its button1
-                        intent = new Intent(MainPage.this,UpdateCustomer.class);
 
-                        intent.putExtra("ID", Integer.toString(id));
-                        intent.putExtra("NAME", name);
-                        intent.putExtra("NOTE", contact);
-                        intent.putExtra("DESCRIPTION", desc);
-                        intent.putExtra("DATE", date);
-
-
-                        startActivityForResult(intent,5);
-                        break;
-                    case R.id.Button_Delete:
-                        DbDataSource db = new DbDataSource(view.getContext());
-                        db.open();
-                        db.deleteCustomer(id);
-                        finish();
-                        startActivity(getIntent());
-                        break;
 
                 }
 
 
             }
         };
-        m_customerArrayAdapter = new CustomerArrayAdapter(R.layout.customer_list_item, m_customerArrayList,listener);
+        m_customerArrayAdapter = new ViewArrayAdapter(R.layout.view_list_item, m_customerArrayList,listener);
         m_recyclerView = (RecyclerView) findViewById(R.id.RecyclerView_CustomerList);
         m_recyclerView.setLayoutManager(new LinearLayoutManager(this));
         m_recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -107,14 +89,21 @@ public class MainPage extends AppCompatActivity {
         switch (item.getItemId()) {
             // action with ID action_goto_add_customer was selected
             case R.id.action_goto_add_customer:
-                startActivityForResult(new Intent(MainPage.this, AddCustomer.class), 4);
+                startActivityForResult(new Intent(ViewPage.this, AddCustomer.class), 4);
                 break;
             case R.id.action_logout:
-                startActivityForResult(new Intent(MainPage.this, MainActivity.class), 4);
+                startActivityForResult(new Intent(ViewPage.this, MainActivity.class), 4);
                 break;
             case R.id.action_viewall:
-                startActivityForResult(new Intent(MainPage.this, ViewPage.class), 4);
+                startActivityForResult(new Intent(ViewPage.this, ViewPage.class), 4);
                 break;
+            case android.R.id.home:
+                Intent data = new Intent();
+                // add data to Intent
+                setResult(Activity.RESULT_CANCELED, data);
+                Toast.makeText(getApplicationContext(),"Back button clicked", Toast.LENGTH_SHORT).show();
+                finish();
+                //Don't apply break statement. It will stop the home action.
             default:
                 break;
         }
@@ -128,10 +117,8 @@ public class MainPage extends AppCompatActivity {
         m_customerArrayList.clear();
         DbDataSource database = new DbDataSource(this);
         database.open();
-        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
-        String users= pref.getString("name","name");
         //The following command will retrieve all data from the database
-        Cursor cursor = database.selectAllMine(users);
+        Cursor cursor = database.selectAllCustomers();
         //The following block of code is frequently used by developers to
         //(1)loop through one record at a time and (2)quickily display in a TextView
         //to have some assurance that the database has the records.

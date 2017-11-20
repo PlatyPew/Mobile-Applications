@@ -10,10 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 
 
-public class CustomerArrayAdapter extends RecyclerView.Adapter<CustomerArrayAdapter.ViewHolder> {
+public class ViewArrayAdapter extends RecyclerView.Adapter<ViewArrayAdapter.ViewHolder> {
 
 
     private RecyclerViewClickListener mListener;
@@ -22,7 +23,7 @@ public class CustomerArrayAdapter extends RecyclerView.Adapter<CustomerArrayAdap
     private int listItemLayout;
     private ArrayList<Customer> customerArrayList;
     // Constructor of the class
-    public CustomerArrayAdapter(int layoutId, ArrayList<Customer> itemList, RecyclerViewClickListener listener) {
+    public ViewArrayAdapter(int layoutId, ArrayList<Customer> itemList, RecyclerViewClickListener listener) {
         listItemLayout = layoutId;
         this.customerArrayList = itemList;
         this.mListener = listener;
@@ -70,8 +71,7 @@ public class CustomerArrayAdapter extends RecyclerView.Adapter<CustomerArrayAdap
         public TextView textView_date;
         public TextView textView_creat;
         public Button button_view;
-        public Button button_edit;
-        public Button button_delete;
+
         private RecyclerViewClickListener mListener;
         public ViewHolder(View itemView, RecyclerViewClickListener listener) {
             super(itemView);
@@ -86,13 +86,9 @@ public class CustomerArrayAdapter extends RecyclerView.Adapter<CustomerArrayAdap
             textView_creat = (TextView) itemView.findViewById(R.id.TextView_creator);
 
             button_view = (Button) itemView.findViewById(R.id.Button_view);
-            button_edit = (Button) itemView.findViewById(R.id.Button_Edit);
-            button_delete = (Button) itemView.findViewById(R.id.Button_Delete);
 
-            //Defined a click listener only for the button which has the edit icon
             button_view.setOnClickListener(this);
-            button_edit.setOnClickListener(this);
-            button_delete.setOnClickListener(this);
+
 
         }
         @Override

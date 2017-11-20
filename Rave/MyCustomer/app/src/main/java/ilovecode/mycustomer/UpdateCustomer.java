@@ -2,6 +2,7 @@ package ilovecode.mycustomer;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -76,12 +77,14 @@ public class UpdateCustomer extends AppCompatActivity {
                 DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
                 Date datee = new Date();
                 String dates = "Last edited on: "+dateFormat.format(datee);
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                String user= pref.getString("name","name");
 
 
                 DbDataSource db = new DbDataSource(v.getContext());
 
                 db.open();
-                db.updateCustomer(id,nameee,noteee,descee,dates);
+                db.updateCustomer(id,nameee,noteee,descee,dates,user);
                 Toast.makeText(v.getContext(), "edited one note", Toast.LENGTH_SHORT).show();
                 db.close();
 

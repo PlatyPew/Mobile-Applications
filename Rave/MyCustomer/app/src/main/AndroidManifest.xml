@@ -39,6 +39,20 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ilovecode.mycustomer.MainActivity" />
         </activity>
+        <activity android:name=".MainPage"
+            android:parentActivityName=".MainActivity">
+            <!-- The meta-data element is needed for versions lower than 4.1 -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ilovecode.mycustomer.MainActivity" />
+        </activity>
+        <activity android:name=".ViewPage"
+            android:parentActivityName=".MainActivity">
+            <!-- The meta-data element is needed for versions lower than 4.1 -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ilovecode.mycustomer.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

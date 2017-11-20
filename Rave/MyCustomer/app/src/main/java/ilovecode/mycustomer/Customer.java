@@ -11,18 +11,20 @@ public class Customer {
     private String name;
     private String notes;
     private String date;
+    private String user;
     //private String img;
 
     //I have provided a constructor so that it is easier to provide
     //code such as new Customer(0,'RICHARD LOW','90883377');
     //The command can create a Customer type object and at the same time fill the object's
     //properties to describe one customer information.
-    public Customer(int inId, String inName, String notes, String date, String desc){//, String img){
+    public Customer(int inId, String inName, String notes, String date, String desc, String user){//, String img){
         this.name=inName;
         this.id = inId;
         this.notes = notes;
         this.date = date;
         this.desc = desc;
+        this.user=user;
         //this.img = img;
 
     }
@@ -61,6 +63,13 @@ public class Customer {
     }
     public void setNote(String inMobileContact) {
         this.notes = inMobileContact;
+    }
+
+    public String getUser() {
+        return this.user;
+    }
+    public void setUser(String inMobileContact) {
+        this.user = inMobileContact;
     }
 
 

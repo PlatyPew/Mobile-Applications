@@ -2,18 +2,17 @@ package ilovecode.mycustomer;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
+
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+
 import android.view.View;
 
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -24,148 +23,65 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<Customer> m_customerArrayList;
     RecyclerView m_recyclerView;
     public static CustomerArrayAdapter m_customerArrayAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.login);
 
-        // Initializing list view with the custom adapter
-        m_customerArrayList = new ArrayList<Customer>();
-        RecyclerViewClickListener listener = new RecyclerViewClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                //Toast.makeText(view.getContext(), "You have selected position " + position, Toast.LENGTH_SHORT).show();
-                Customer selectedCustomerToUpdate = m_customerArrayList.get(position);
-                int id = selectedCustomerToUpdate.getId();
-                String name = selectedCustomerToUpdate.getName();
-                String contact = selectedCustomerToUpdate.getNote();
-                String desc = selectedCustomerToUpdate.getDesc();
-                String date = selectedCustomerToUpdate.getDate();
-                Intent intent=null;
-                switch(view.getId())  //get the id of the view clicked. (in this case button)
-                {
-                    case R.id.Button_view : // if its button1
-                         intent = new Intent(MainActivity.this,ViewCustomer.class);
+        Button buttonOne = (Button) findViewById(R.id.Button_login);
+        buttonOne.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                DbDataSource db = new DbDataSource(v.getContext());
+                db.open();
 
-                        intent.putExtra("ID", Integer.toString(id));
-                        intent.putExtra("NAME", name);
-                        intent.putExtra("NOTE", contact);
-                        intent.putExtra("DESCRIPTION", desc);
-                        intent.putExtra("DATE", date);
+                EditText editTextName = (EditText) findViewById(R.id.EditText_Name);
+                String name = editTextName.getText().toString();
 
+                EditText passwordd = (EditText) findViewById(R.id.EditText_password);
+                String password = passwordd.getText().toString();
+                Cursor cursor = db.login(name, password);
+                 if (((cursor!= null)&&(cursor.getCount()>0))) {
+                     SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                     SharedPreferences.Editor editor = pref.edit();
+                     editor.putString("name", name);
 
-                        startActivityForResult(intent,5);
-                        break;
-                    case R.id.Button_Edit : // if its button1
-                        intent = new Intent(MainActivity.this,UpdateCustomer.class);
+                     editor.commit(); // commit changes
+                     Toast.makeText(getApplicationContext(),"Logged in!", Toast.LENGTH_SHORT).show();
 
-                        intent.putExtra("ID", Integer.toString(id));
-                        intent.putExtra("NAME", name);
-                        intent.putExtra("NOTE", contact);
-                        intent.putExtra("DESCRIPTION", desc);
-                        intent.putExtra("DATE", date);
+                     Intent intent = new Intent(MainActivity.this, MainPage.class);
+                     startActivityForResult(intent, 5);
+                } else {
+                     Toast.makeText(getApplicationContext(),"Wrong username or password", Toast.LENGTH_SHORT).show();
 
 
-                        startActivityForResult(intent,5);
-                        break;
-                    case R.id.Button_Delete:
-                        DbDataSource db = new DbDataSource(view.getContext());
-                        db.open();
-                        db.deleteCustomer(id);
-                        finish();
-                        startActivity(getIntent());
-                        break;
+                 }
+                db.close();
+            }
 
-                }
+        });
+        Button buttontwo = (Button) findViewById(R.id.Button_signup);
+        buttontwo.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                DbDataSource db = new DbDataSource(v.getContext());
+                db.open();
 
+                EditText editTextNames = (EditText) findViewById(R.id.EditText_Name);
+                String names = editTextNames.getText().toString();
+
+                EditText passwordds = (EditText) findViewById(R.id.EditText_password);
+                String passwords = passwordds.getText().toString();
+                db.insertUser(names, passwords);
+                db.close();
+                Toast.makeText(getApplicationContext(),"User "+names+" created!", Toast.LENGTH_SHORT).show();
 
             }
-        };
-        m_customerArrayAdapter = new CustomerArrayAdapter(R.layout.customer_list_item, m_customerArrayList,listener);
-        m_recyclerView = (RecyclerView) findViewById(R.id.RecyclerView_CustomerList);
-        m_recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        m_recyclerView.setItemAnimator(new DefaultItemAnimator());
-        m_recyclerView.setAdapter(m_customerArrayAdapter);
+        });
 
-        loadData();
+
     }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        //Reference: http://www.vogella.com/tutorials/AndroidActionBar/article.html
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
-        return true;
-    }//End of onCreateOptionsMenu
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // action with ID action_goto_add_customer was selected
-            case R.id.action_goto_add_customer:
-                startActivityForResult(new Intent(MainActivity.this, AddCustomer.class), 4);
-                break;
-            default:
-                break;
-        }
-        return true;
-    }//End of onOptionsItemSelected(...)
-
-    protected void loadData(){
-        Customer oneCustomer;
-        //Note: the m_customerArrayList is declared as class member variable
-        //Clear the m_customerArrayList first before opening the database
-        m_customerArrayList.clear();
-        DbDataSource database = new DbDataSource(this);
-        database.open();
-        //The following command will retrieve all data from the database
-        Cursor cursor = database.selectAllCustomers();
-        //The following block of code is frequently used by developers to
-        //(1)loop through one record at a time and (2)quickily display in a TextView
-        //to have some assurance that the database has the records.
-        //I obtained these code from
-        //https://stackoverflow.com/questions/10723770/whats-the-best-way-to-iterate-an-android-cursor
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            int id = cursor.getInt(cursor.getColumnIndex("_ID"));
-            String name = cursor.getString(cursor.getColumnIndex("NAME"));
-            String note = cursor.getString(cursor.getColumnIndex("NOTES"));
-            String desc = cursor.getString(cursor.getColumnIndex("DESC"));
-            String date = cursor.getString(cursor.getColumnIndex("DATE"));
-            oneCustomer = new Customer(id,name,note,date,desc);
-            m_customerArrayList.add(oneCustomer);
-            cursor.moveToNext();
-        }
-        database.close();
-        //After executing the code inside loadData() method, need to close the database
-    }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        //I was not sure whether this onActivityResult will execute.
-        //Therefore, I used Log.d to check.
-        Log.v("MainActivity","Request code" + requestCode);
-        if (requestCode == 4) {
-            Log.v("MainActivity","Executed onActivityResult 4");
-            loadData();//Update the recylcerview to reflect the changes
-            m_customerArrayAdapter.notifyDataSetChanged();
-        }
-        if ((requestCode == 5)&&(resultCode == Activity.RESULT_CANCELED)) {
-            Log.v("MainActivity","You visited the Edit screen and clicked Home");
-            Toast.makeText(getBaseContext(), "You visited the Edit screen and clicked Home or Back", Toast.LENGTH_SHORT).show();
-            loadData();//Update the recylcerview to reflect the changes
-            m_customerArrayAdapter.notifyDataSetChanged();
-        }
-    }
-
-
-
-
-
-
-
-
 }
+
+
+
+

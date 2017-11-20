@@ -2,6 +2,7 @@ package ilovecode.mycustomer;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -48,6 +49,11 @@ public class ViewCustomer extends AppCompatActivity {
         editTextdesc.setText(desc);
         TextView editTextdate= (TextView)findViewById(R.id.EditText_Date);
         editTextdate.setText(date);
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+        String user= pref.getString("name","name");
+        TextView creat= (TextView)findViewById(R.id.EditText_creator);
+        creat.setText(user);
+
 
 
     }//End of onCreate

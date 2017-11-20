@@ -41,6 +41,7 @@ public class DbDataSource {
             values.put(DbHelper.COLUMN_NOTES, customer.getNote());
             values.put(DbHelper.COLUMN_DESC, customer.getDesc());
             values.put(DbHelper.COLUMN_DATE, customer.getDate());
+            values.put(DbHelper.COLUMN_CREATOR, customer.getUser());
 
             m_database.insert(DbHelper.TABLE, null, values);
 
@@ -50,9 +51,32 @@ public class DbDataSource {
         }
     }
 
+    public void insertUser(String user, String password) {
+        m_database.beginTransaction();
+        try{
+            ContentValues values = new ContentValues();
+            values.put(DbHelper.COLUMN_CREATOR, user);
+            values.put(DbHelper.COLUMN_PASSWORD, password);
+            m_database.insert(DbHelper.TABLE1, null, values);
+
+            m_database.setTransactionSuccessful();
+        } finally {
+            m_database.endTransaction();
+        }
+    }
+    public Cursor login(String user, String password) {
+        Cursor cursor = m_database.rawQuery("SELECT * FROM " + DbHelper.TABLE1+" where "
+                + DbHelper.COLUMN_CREATOR+" IS \'" +user+"\' AND "+ DbHelper.COLUMN_PASSWORD+" IS \'" +password+"\';", null);
+        return cursor;
+    }
+
     //select
     public Cursor selectAllCustomers(){
         Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE, null);
+        return cursor;
+    }
+    public Cursor selectAllMine(String user){
+        Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE +" where "+ DbHelper.COLUMN_CREATOR+" IS \'" +user+"\'", null);
         return cursor;
     }
 
@@ -63,13 +87,14 @@ public class DbDataSource {
     }
 
     //update
-    public boolean updateCustomer(int inId, String inName, String notes,String desc, String date){
+    public boolean updateCustomer(int inId, String inName, String notes,String desc, String date, String user){
         ContentValues values = new ContentValues();
         int success = -1;
         values.put(DbHelper.COLUMN_NAME, inName);
         values.put(DbHelper.COLUMN_NOTES, notes);
         values.put(DbHelper.COLUMN_DESC, desc);
         values.put(DbHelper.COLUMN_DATE, date);
+        values.put(DbHelper.COLUMN_CREATOR, user);
         success =  m_database.update(
                 DbHelper.TABLE,
                 values,

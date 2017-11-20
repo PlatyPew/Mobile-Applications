@@ -18,16 +18,29 @@
         </EditText>
 
         <EditText
+            android:id="@+id/EditText_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPassword" />
+            android:hint="Password"
+            android:textSize="10pt"
+            android:inputType="textPassword">
+        </EditText>
+
+
 
         <Button
-            android:id="@+id/Button_Save"
+            android:id="@+id/Button_login"
             android:layout_height="wrap_content"
-            android:text="Save"
-            android:layout_width="match_parent">
+            android:text="Sign-in"
+            android:layout_width="match_parent"
+             >
+    </Button>
+        <Button
+            android:id="@+id/Button_signup"
+            android:layout_height="wrap_content"
+            android:text="Sign-up"
+            android:layout_width="match_parent"
+             >
         </Button>
     </LinearLayout>
 </ScrollView>

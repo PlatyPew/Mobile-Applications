@@ -25,22 +25,6 @@
         android:textSize="20sp"/>
 
     <Button
-        android:id="@+id/Button_Edit"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_gravity="right"
-        android:drawableRight="@android:drawable/ic_menu_edit"
-        android:padding="2dp"></Button>
-
-    <Button
-        android:id="@+id/Button_Delete"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_gravity="right"
-        android:drawableRight="@android:drawable/ic_menu_delete"
-        android:padding="2dp"></Button>
-
-    <Button
         android:id="@+id/Button_view"
         android:layout_width="40dp"
         android:layout_height="40dp"

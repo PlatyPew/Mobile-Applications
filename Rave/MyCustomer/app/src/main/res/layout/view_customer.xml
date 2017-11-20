@@ -26,6 +26,13 @@
             android:textSize="11pt">
         </TextView>
         <TextView
+            android:id="@+id/EditText_creator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Creator"
+            android:textSize="10pt">
+        </TextView>
+        <TextView
             android:id="@+id/EditText_Desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
