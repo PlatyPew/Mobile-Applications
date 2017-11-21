@@ -9,8 +9,8 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/RecyclerView_CustomerList"
         android:layout_width="match_parent"
-        android:layout_height="511dp"
+        android:layout_height="match_parent"
         android:scrollbars="vertical"
-        tools:layout_editor_absoluteY="0dp" />
+        />
 
 </android.support.constraint.ConstraintLayout>

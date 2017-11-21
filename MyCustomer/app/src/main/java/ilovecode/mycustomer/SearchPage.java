@@ -2,7 +2,6 @@ package ilovecode.mycustomer;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -20,7 +19,7 @@ import java.util.ArrayList;
 
 import ilovecode.mycustomer.db.DbDataSource;
 
-public class  ViewPage extends AppCompatActivity {
+public class SearchPage extends AppCompatActivity {
     public static ArrayList<Customer> m_customerArrayList;
     RecyclerView m_recyclerView;
     public static ViewArrayAdapter m_customerArrayAdapter;
@@ -48,7 +47,7 @@ public class  ViewPage extends AppCompatActivity {
                 switch(view.getId())  //get the id of the view clicked. (in this case button)
                 {
                     case R.id.Button_view : // if its button1
-                        intent = new Intent(ViewPage.this,ViewCustomer.class);
+                        intent = new Intent(SearchPage.this,ViewCustomer.class);
 
                         intent.putExtra("ID", Integer.toString(id));
                         intent.putExtra("NAME", name);
@@ -74,8 +73,8 @@ public class  ViewPage extends AppCompatActivity {
         m_recyclerView.setLayoutManager(new LinearLayoutManager(this));
         m_recyclerView.setItemAnimator(new DefaultItemAnimator());
         m_recyclerView.setAdapter(m_customerArrayAdapter);
-
-        loadData();
+        String name = getIntent().getStringExtra("SEARCH");
+        loadData(name);
     }
 
 
@@ -92,16 +91,16 @@ public class  ViewPage extends AppCompatActivity {
         switch (item.getItemId()) {
             // action with ID action_goto_add_customer was selected
             case R.id.action_goto_add_customer:
-                startActivityForResult(new Intent(ViewPage.this, AddCustomer.class), 4);
+                startActivityForResult(new Intent(SearchPage.this, AddCustomer.class), 4);
                 break;
             case R.id.action_logout:
-                startActivityForResult(new Intent(ViewPage.this, MainActivity.class), 4);
+                startActivityForResult(new Intent(SearchPage.this, MainActivity.class), 4);
                 break;
             case R.id.action_viewall:
-                startActivityForResult(new Intent(ViewPage.this, ViewPage.class), 4);
+                startActivityForResult(new Intent(SearchPage.this, ViewPage.class), 4);
                 break;
             case R.id.action_search:
-                startActivityForResult(new Intent(ViewPage.this, Search.class), 4);
+                startActivityForResult(new Intent(SearchPage.this, Search.class), 4);
                 break;
             case android.R.id.home:
                 Intent data = new Intent();
@@ -116,7 +115,7 @@ public class  ViewPage extends AppCompatActivity {
         return true;
     }//End of onOptionsItemSelected(...)
 
-    protected void loadData(){
+    protected void loadData(String n){
         Customer oneCustomer;
         //Note: the m_customerArrayList is declared as class member variable
         //Clear the m_customerArrayList first before opening the database
@@ -124,7 +123,7 @@ public class  ViewPage extends AppCompatActivity {
         DbDataSource database = new DbDataSource(this);
         database.open();
         //The following command will retrieve all data from the database
-        Cursor cursor = database.selectAllCustomers();
+        Cursor cursor = database.search(n);
         //The following block of code is frequently used by developers to
         //(1)loop through one record at a time and (2)quickily display in a TextView
         //to have some assurance that the database has the records.
@@ -148,23 +147,8 @@ public class  ViewPage extends AppCompatActivity {
     }
 
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        //I was not sure whether this onActivityResult will execute.
-        //Therefore, I used Log.d to check.
-        Log.v("MainActivity","Request code" + requestCode);
-        if (requestCode == 4) {
-            Log.v("MainActivity","Executed onActivityResult 4");
-            loadData();//Update the recylcerview to reflect the changes
-            m_customerArrayAdapter.notifyDataSetChanged();
-        }
-        if ((requestCode == 5)&&(resultCode == Activity.RESULT_CANCELED)) {
-            Log.v("MainActivity","You visited the Edit screen and clicked Home");
-            Toast.makeText(getBaseContext(), "You visited the Edit screen and clicked Home or Back", Toast.LENGTH_SHORT).show();
-            loadData();//Update the recylcerview to reflect the changes
-            m_customerArrayAdapter.notifyDataSetChanged();
-        }
+
+
     }
 
 
@@ -174,4 +158,4 @@ public class  ViewPage extends AppCompatActivity {
 
 
 
-}
+

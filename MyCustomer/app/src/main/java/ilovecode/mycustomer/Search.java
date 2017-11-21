@@ -1,5 +1,6 @@
 package ilovecode.mycustomer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -22,15 +23,10 @@ public class Search extends AppCompatActivity {
 
                 EditText editTextName= (EditText)findViewById(R.id.EditText_txt);
                 String nameee = editTextName.getText().toString();
+                Intent intent = new Intent(Search.this,SearchPage.class);
+                intent.putExtra("SEARCH", nameee);
+                startActivityForResult(intent, 5);
 
-
-                DbDataSource db = new DbDataSource(v.getContext());
-
-                db.open();
-                db.search(nameee);
-                db.close();
-
-                finish();
             }
         });//end of setOnClickListener()
 

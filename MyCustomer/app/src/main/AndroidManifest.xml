@@ -55,12 +55,19 @@
                 android:value="ilovecode.mycustomer.MainActivity" />
         </activity>
         <activity android:name=".Search"
-        android:parentActivityName=".MainActivity">
-        <!-- The meta-data element is needed for versions lower than 4.1 -->
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="ilovecode.mycustomer.MainActivity" />
-    </activity>
+            android:parentActivityName=".MainActivity">
+            <!-- The meta-data element is needed for versions lower than 4.1 -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ilovecode.mycustomer.MainActivity" />
+        </activity>
+        <activity android:name=".SearchPage"
+            android:parentActivityName=".MainActivity">
+            <!-- The meta-data element is needed for versions lower than 4.1 -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ilovecode.mycustomer.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
