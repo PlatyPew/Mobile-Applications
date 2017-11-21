@@ -76,6 +76,10 @@ public class DbDataSource {
         Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE+" where "+ DbHelper.COLUMN_PERM+" IS \'pu\'", null);
         return cursor;
     }
+    public Cursor search(String k){
+        Cursor cursor = m_database.rawQuery("SELECT * FROM " + DbHelper.TABLE+" WHERE "+ DbHelper.COLUMN_PERM+" IS \'pu\'", null);
+        return cursor;
+    }
     public Cursor selectAllMine(String user){
         Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE +" where "+ DbHelper.COLUMN_CREATOR+" IS \'" +user+"\'", null);
         return cursor;
@@ -111,8 +115,6 @@ public class DbDataSource {
         }
 
     }
-
-
 
     //delete
     public void delete(int id) {

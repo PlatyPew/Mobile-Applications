@@ -16,4 +16,10 @@
         android:orderInCategory="100"
         app:showAsAction="always"
         android:title="view all"/>
+
+    <item
+        android:id="@+id/action_search"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:title="Search"/>
 </menu>

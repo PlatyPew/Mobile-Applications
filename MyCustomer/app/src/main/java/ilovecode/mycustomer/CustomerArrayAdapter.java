@@ -1,7 +1,4 @@
 package ilovecode.mycustomer;
-/**
- * Created by Ah Tan on 1/11/17.
- */
 
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
