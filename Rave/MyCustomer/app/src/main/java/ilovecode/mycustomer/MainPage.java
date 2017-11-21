@@ -41,7 +41,7 @@ public class MainPage extends AppCompatActivity {
                 String contact = selectedCustomerToUpdate.getNote();
                 String desc = selectedCustomerToUpdate.getDesc();
                 String date = selectedCustomerToUpdate.getDate();
-
+                String perm=selectedCustomerToUpdate.getPerm();
 
                 Intent intent=null;
                 switch(view.getId())  //get the id of the view clicked. (in this case button)
@@ -54,6 +54,7 @@ public class MainPage extends AppCompatActivity {
                         intent.putExtra("NOTE", contact);
                         intent.putExtra("DESCRIPTION", desc);
                         intent.putExtra("DATE", date);
+                        intent.putExtra("PERM", perm);
 
 
 
@@ -67,6 +68,8 @@ public class MainPage extends AppCompatActivity {
                         intent.putExtra("NOTE", contact);
                         intent.putExtra("DESCRIPTION", desc);
                         intent.putExtra("DATE", date);
+                        intent.putExtra("PERM", perm);
+
 
 
                         startActivityForResult(intent,5);
@@ -145,8 +148,8 @@ public class MainPage extends AppCompatActivity {
             String desc = cursor.getString(cursor.getColumnIndex("DESC"));
             String date = cursor.getString(cursor.getColumnIndex("DATE"));
             String user = cursor.getString(cursor.getColumnIndex("USER"));
-
-            oneCustomer = new Customer(id,name,note,date,desc,user);
+            String perm = cursor.getString(cursor.getColumnIndex("PERM"));
+            oneCustomer = new Customer(id,name,note,date,desc,user,perm);
             m_customerArrayList.add(oneCustomer);
             cursor.moveToNext();
         }

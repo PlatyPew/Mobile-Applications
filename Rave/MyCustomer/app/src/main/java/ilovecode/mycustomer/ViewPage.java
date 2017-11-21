@@ -41,23 +41,46 @@ public class ViewPage extends AppCompatActivity {
                 String contact = selectedCustomerToUpdate.getNote();
                 String desc = selectedCustomerToUpdate.getDesc();
                 String date = selectedCustomerToUpdate.getDate();
+                String perm = selectedCustomerToUpdate.getPerm();
 
 
                 Intent intent=null;
                 switch(view.getId())  //get the id of the view clicked. (in this case button)
                 {
                     case R.id.Button_view : // if its button1
-                         intent = new Intent(ViewPage.this,ViewCustomer.class);
+                        intent = new Intent(ViewPage.this,ViewCustomer.class);
 
                         intent.putExtra("ID", Integer.toString(id));
                         intent.putExtra("NAME", name);
                         intent.putExtra("NOTE", contact);
                         intent.putExtra("DESCRIPTION", desc);
                         intent.putExtra("DATE", date);
+                        intent.putExtra("PERM", perm);
 
 
 
                         startActivityForResult(intent,5);
+                        break;
+                    case R.id.Button_Edit : // if its button1
+                        intent = new Intent(ViewPage.this,UpdateCustomer.class);
+
+                        intent.putExtra("ID", Integer.toString(id));
+                        intent.putExtra("NAME", name);
+                        intent.putExtra("NOTE", contact);
+                        intent.putExtra("DESCRIPTION", desc);
+                        intent.putExtra("DATE", date);
+                        intent.putExtra("PERM", perm);
+
+
+
+                        startActivityForResult(intent,5);
+                        break;
+                    case R.id.Button_Delete:
+                        DbDataSource db = new DbDataSource(view.getContext());
+                        db.open();
+                        db.deleteCustomer(id);
+                        finish();
+                        startActivity(getIntent());
                         break;
 
 
@@ -132,8 +155,8 @@ public class ViewPage extends AppCompatActivity {
             String desc = cursor.getString(cursor.getColumnIndex("DESC"));
             String date = cursor.getString(cursor.getColumnIndex("DATE"));
             String user = cursor.getString(cursor.getColumnIndex("USER"));
-
-            oneCustomer = new Customer(id,name,note,date,desc,user);
+            String perm = cursor.getString(cursor.getColumnIndex("PERM"));
+            oneCustomer = new Customer(id,name,note,date,desc,user,perm);
             m_customerArrayList.add(oneCustomer);
             cursor.moveToNext();
         }

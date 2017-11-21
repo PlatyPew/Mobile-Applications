@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ public class UpdateCustomer extends AppCompatActivity {
     private String note;
     private String desc;
     private String date;
+    private String perm;
 
 
 
@@ -44,7 +46,7 @@ public class UpdateCustomer extends AppCompatActivity {
         note = getIntent().getStringExtra("NOTE");
         desc = getIntent().getStringExtra("DESCRIPTION");
         date = getIntent().getStringExtra("DATE");
-
+        perm = getIntent().getStringExtra("PERM");
 
         //After collecting the data, the data is used to display inside
         //the correct controls.
@@ -55,7 +57,13 @@ public class UpdateCustomer extends AppCompatActivity {
         editTextMobileContact.setText(note);
         TextView editTextdesc= (TextView)findViewById(R.id.EditText_desc);
         editTextdesc.setText(desc);
-
+        RadioButton rb1 = (RadioButton) findViewById(R.id.priv);
+        RadioButton rb = (RadioButton) findViewById(R.id.publi);
+        if(perm.equals("pr")){
+            rb1.setChecked(true);
+        }else{
+            rb.setChecked(true);
+        }
 
         findViewById(R.id.Button_Save).setOnClickListener( new View.OnClickListener() {
             @Override
@@ -79,12 +87,17 @@ public class UpdateCustomer extends AppCompatActivity {
                 String dates = "Last edited on: "+dateFormat.format(datee);
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
                 String user= pref.getString("name","name");
+                String perm="pu";
+                RadioButton rb1 = (RadioButton) findViewById(R.id.priv);
+                if(rb1.isChecked()){
 
+                    perm="pr";
+                }
 
                 DbDataSource db = new DbDataSource(v.getContext());
 
                 db.open();
-                db.updateCustomer(id,nameee,noteee,descee,dates,user);
+                db.updateCustomer(id,nameee,noteee,descee,dates,user,perm);
                 Toast.makeText(v.getContext(), "edited one note", Toast.LENGTH_SHORT).show();
                 db.close();
 

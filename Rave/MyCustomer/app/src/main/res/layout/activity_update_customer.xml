@@ -31,6 +31,27 @@
             android:hint="Notes"
             android:textSize="10pt">
         </EditText>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="" />
+
+        <RadioGroup
+            android:id="@+id/radioperm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+            <RadioButton
+                android:id="@+id/priv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Private" />
+
+            <RadioButton
+                android:id="@+id/publi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Public" />
+        </RadioGroup>
         <Button
             android:id="@+id/Button_Save"
             android:layout_height="wrap_content"

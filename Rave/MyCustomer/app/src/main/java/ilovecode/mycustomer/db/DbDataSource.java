@@ -42,6 +42,7 @@ public class DbDataSource {
             values.put(DbHelper.COLUMN_DESC, customer.getDesc());
             values.put(DbHelper.COLUMN_DATE, customer.getDate());
             values.put(DbHelper.COLUMN_CREATOR, customer.getUser());
+            values.put(DbHelper.COLUMN_PERM, customer.getPerm());
 
             m_database.insert(DbHelper.TABLE, null, values);
 
@@ -72,7 +73,7 @@ public class DbDataSource {
 
     //select
     public Cursor selectAllCustomers(){
-        Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE, null);
+        Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE+" where "+ DbHelper.COLUMN_PERM+" IS \'pu\'", null);
         return cursor;
     }
     public Cursor selectAllMine(String user){
@@ -87,7 +88,7 @@ public class DbDataSource {
     }
 
     //update
-    public boolean updateCustomer(int inId, String inName, String notes,String desc, String date, String user){
+    public boolean updateCustomer(int inId, String inName, String notes,String desc, String date, String user,String perm){
         ContentValues values = new ContentValues();
         int success = -1;
         values.put(DbHelper.COLUMN_NAME, inName);
@@ -95,6 +96,7 @@ public class DbDataSource {
         values.put(DbHelper.COLUMN_DESC, desc);
         values.put(DbHelper.COLUMN_DATE, date);
         values.put(DbHelper.COLUMN_CREATOR, user);
+        values.put(DbHelper.COLUMN_PERM, perm);
         success =  m_database.update(
                 DbHelper.TABLE,
                 values,

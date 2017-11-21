@@ -69,7 +69,9 @@ public class CustomerArrayAdapter extends RecyclerView.Adapter<CustomerArrayAdap
         public TextView textView_desc;
         public TextView textView_date;
         public TextView textView_creat;
+        public TextView textView_perm;
         public Button button_view;
+
         public Button button_edit;
         public Button button_delete;
         private RecyclerViewClickListener mListener;

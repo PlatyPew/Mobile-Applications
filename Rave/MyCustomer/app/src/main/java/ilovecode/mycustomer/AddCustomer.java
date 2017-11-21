@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import java.text.DateFormat;
@@ -33,7 +34,7 @@ public class AddCustomer extends AppCompatActivity {
                 //use the getText() which belongs to the editTextName to grab the user input
                 EditText editTextName= (EditText)findViewById(R.id.EditText_Name);
                 String name = editTextName.getText().toString();
-
+                String perm ="pu";
                 EditText notee= (EditText)findViewById(R.id.EditText_note);
                 String note = notee.getText().toString();
 
@@ -47,12 +48,16 @@ public class AddCustomer extends AppCompatActivity {
 
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
                 String user= pref.getString("name","name");
+                RadioButton rb1 = (RadioButton) findViewById(R.id.priv);
+                if(rb1.isChecked()){
 
+                    perm="pr";
+                }
                 DbDataSource db = new DbDataSource(v.getContext());
-                Customer newCustomer = new Customer(0,name,note,date,desc,user);
+                Customer newCustomer = new Customer(0,name,note,date,desc,user,perm);
                 db.open();
                 db.insertCustomer(newCustomer);
-                Toast.makeText(v.getContext(), "Saved one customer", Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(), "Saved one note", Toast.LENGTH_SHORT).show();
                 db.close();
 
                 finish();
