@@ -179,12 +179,4 @@ public class MainPage extends AppCompatActivity {
             m_customerArrayAdapter.notifyDataSetChanged();
         }
     }
-
-
-
-
-
-
-
-
 }
