@@ -10,16 +10,21 @@
         android:id="@+id/action_logout"
         android:orderInCategory="100"
         app:showAsAction="always"
-        android:title="Log-Out"/>
+        android:title="LogOut"/>
     <item
         android:id="@+id/action_viewall"
         android:orderInCategory="100"
         app:showAsAction="always"
-        android:title="view all"/>
+        android:title="All"/>
 
     <item
         android:id="@+id/action_search"
         android:orderInCategory="100"
         app:showAsAction="always"
         android:title="Search"/>
+    <item
+        android:id="@+id/action_recent"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:title="Recent"/>
 </menu>

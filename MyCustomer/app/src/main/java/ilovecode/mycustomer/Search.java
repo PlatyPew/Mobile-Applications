@@ -25,25 +25,30 @@ public class Search extends AppCompatActivity {
                         String searchString = editTextSearch.getText().toString();
                         DbDataSource db = new DbDataSource(view.getContext());
                         Toast.makeText(view.getContext(), "Searched for: " + searchString, Toast.LENGTH_SHORT).show();
-                        db.open();
-                        db.search(searchString);
-                        db.close();
+                        Intent intent=new Intent(Search.this, ViewPage.class);
+                        intent.putExtra("SEARCH", searchString);
+                        startActivityForResult(intent,5);
                         break;
                 }
                 finish();
             }
         });
     }
-    @Override
-    public void onBackPressed() {
-        Intent data = new Intent();
-        // add data to Intent
-        setResult(Activity.RESULT_CANCELED, data);
-        super.onBackPressed();
-    }
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            // action with ID action_goto_add_customer was selected
+            case R.id.action_goto_add_customer:
+                startActivityForResult(new Intent(Search.this, AddCustomer.class), 4);
+                break;
+            case R.id.action_logout:
+                startActivityForResult(new Intent(Search.this, MainActivity.class), 4);
+                break;
+            case R.id.action_viewall:
+                startActivityForResult(new Intent(Search.this, ViewPage.class), 4);
+                break;
+            case R.id.action_search:
+                startActivityForResult(new Intent(Search.this, Search.class), 4);
+                break;
             case android.R.id.home:
                 Intent data = new Intent();
                 // add data to Intent
@@ -51,7 +56,18 @@ public class Search extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Back button clicked", Toast.LENGTH_SHORT).show();
                 finish();
                 //Don't apply break statement. It will stop the home action.
+            default:
+                break;
         }
         return true;
+    }//End of onOptionsItemSelected(...)
+    @Override
+    public void onBackPressed() {
+        Intent data = new Intent();
+        // add data to Intent
+        setResult(Activity.RESULT_CANCELED, data);
+        super.onBackPressed();
     }
+
+
 }

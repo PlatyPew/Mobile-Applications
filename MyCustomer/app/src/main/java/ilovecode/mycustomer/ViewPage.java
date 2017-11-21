@@ -61,6 +61,9 @@ public class  ViewPage extends AppCompatActivity {
 
                         startActivityForResult(intent,5);
                         break;
+                    case R.id.Button_Star : // if its button1
+
+                        break;
 
 
 
@@ -74,8 +77,15 @@ public class  ViewPage extends AppCompatActivity {
         m_recyclerView.setLayoutManager(new LinearLayoutManager(this));
         m_recyclerView.setItemAnimator(new DefaultItemAnimator());
         m_recyclerView.setAdapter(m_customerArrayAdapter);
+        String name="";
+        try{
+            name = getIntent().getStringExtra("SEARCH");
 
-        loadData();
+        }catch(Exception e){
+
+        }
+        System.out.println(name);
+        loadData(name);
     }
 
 
@@ -116,7 +126,7 @@ public class  ViewPage extends AppCompatActivity {
         return true;
     }//End of onOptionsItemSelected(...)
 
-    protected void loadData(){
+    protected void loadData(String n){
         Customer oneCustomer;
         //Note: the m_customerArrayList is declared as class member variable
         //Clear the m_customerArrayList first before opening the database
@@ -125,8 +135,11 @@ public class  ViewPage extends AppCompatActivity {
         database.open();
         //The following command will retrieve all data from the database
         Cursor cursor = database.selectAllCustomers();
+        if (n!="" && n!=null){
+            cursor = database.search(n);
+        }
         //The following block of code is frequently used by developers to
-        //(1)loop through one record at a time and (2)quickily display in a TextView
+        //(1)loop through one record at a time and (2) quickily display in a TextView
         //to have some assurance that the database has the records.
         //I obtained these code from
         //https://stackoverflow.com/questions/10723770/whats-the-best-way-to-iterate-an-android-cursor
@@ -148,24 +161,8 @@ public class  ViewPage extends AppCompatActivity {
     }
 
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        //I was not sure whether this onActivityResult will execute.
-        //Therefore, I used Log.d to check.
-        Log.v("MainActivity","Request code" + requestCode);
-        if (requestCode == 4) {
-            Log.v("MainActivity","Executed onActivityResult 4");
-            loadData();//Update the recylcerview to reflect the changes
-            m_customerArrayAdapter.notifyDataSetChanged();
-        }
-        if ((requestCode == 5)&&(resultCode == Activity.RESULT_CANCELED)) {
-            Log.v("MainActivity","You visited the Edit screen and clicked Home");
-            Toast.makeText(getBaseContext(), "You visited the Edit screen and clicked Home or Back", Toast.LENGTH_SHORT).show();
-            loadData();//Update the recylcerview to reflect the changes
-            m_customerArrayAdapter.notifyDataSetChanged();
-        }
-    }
+
+
 
 
 

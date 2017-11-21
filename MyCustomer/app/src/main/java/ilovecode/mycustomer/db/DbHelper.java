@@ -15,6 +15,15 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String COLUMN_CREATOR = "USER";
     public static final String COLUMN_PASSWORD = "PASS";
     public static final String COLUMN_PERM = "PERM";
+    public static final String TABLE2 ="LOGS";
+    public static final String COLUMN_ID1 = "ID";
+    public static final String COLUMN_FROM = "FROM";
+    public static final String COLUMN_TO = "TO";
+    public static final String COLUMN_NOTE = "NOTENAME";
+    public static final String COLUMN_ACTION = "ACTION";
+    public static final String COLUMN_TIME = "TIME";
+
+
 
 
 
@@ -28,9 +37,16 @@ public class DbHelper extends SQLiteOpenHelper {
             ", " + COLUMN_DATE + " TEXT " +
             ", " + COLUMN_PERM + " TEXT " +
             ", " + COLUMN_CREATOR + " TEXT )";
-    private static final String DB_CREATENEW = "CREATE TABLE "+ TABLE1+
+    private static final String DB_CREATE1 = "CREATE TABLE "+ TABLE1+
             " (" + COLUMN_CREATOR + " PRIMARY KEY" +
             ", " + COLUMN_PASSWORD + " TEXT)";
+    private static final String DB_CREATE2 = "CREATE TABLE "+ TABLE2+
+            " (" + COLUMN_ID1 + " INTEGER PRIMARY KEY AUTOINCREMENT" +
+            ", " + COLUMN_FROM + " TEXT " +
+            ", " + COLUMN_TO + " TEXT "+
+            ", " + COLUMN_NOTE + " TEXT " +
+            ", " + COLUMN_ACTION + " TEXT " +
+            ", " + COLUMN_TIME + " TEXT )";
 
 
     public DbHelper(Context context){
@@ -41,7 +57,8 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(DB_CREATE);
-        sqLiteDatabase.execSQL(DB_CREATENEW);
+        sqLiteDatabase.execSQL(DB_CREATE1);
+        sqLiteDatabase.execSQL(DB_CREATE2);
     }
 
     @Override

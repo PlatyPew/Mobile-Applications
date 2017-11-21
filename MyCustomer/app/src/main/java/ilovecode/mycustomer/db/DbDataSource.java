@@ -64,6 +64,23 @@ public class DbDataSource {
             m_database.endTransaction();
         }
     }
+
+    public void insertLog(String from, String to, String note,String action, String time) {
+        m_database.beginTransaction();
+        try{
+            ContentValues values = new ContentValues();
+            values.put(DbHelper.COLUMN_FROM,from);
+            values.put(DbHelper.COLUMN_TO, to);
+            values.put(DbHelper.COLUMN_NOTE, note);
+            values.put(DbHelper.COLUMN_ACTION, action);
+            values.put(DbHelper.COLUMN_TIME, time);
+            m_database.insert(DbHelper.TABLE2, null, values);
+
+            m_database.setTransactionSuccessful();
+        } finally {
+            m_database.endTransaction();
+        }
+    }
     public Cursor login(String user, String password) {
         Cursor cursor = m_database.rawQuery("SELECT * FROM " + DbHelper.TABLE1+" where "
                 + DbHelper.COLUMN_CREATOR+" IS \'" +user+"\' AND "+ DbHelper.COLUMN_PASSWORD+" IS \'" +password+"\';", null);
@@ -79,6 +96,16 @@ public class DbDataSource {
         Cursor cursor = m_database.rawQuery("SELECT * FROM " + DbHelper.TABLE+" WHERE ("+ DbHelper.COLUMN_ID+" LIKE \'"+k+"\' OR "+ DbHelper.COLUMN_NAME+" LIKE \'"+k+"\' OR "+ DbHelper.COLUMN_NOTES+" LIKE \'"+k+"\' OR "+ DbHelper.COLUMN_DESC+" LIKE \'"+k+"\' OR "+ DbHelper.COLUMN_CREATOR+" LIKE \'"+k+"\' OR "+ DbHelper.COLUMN_DATE+" LIKE \'"+k+"\' )AND "+ DbHelper.COLUMN_PERM+" IS \'pu\' ;", null);
         return cursor;
     }
+
+    public Cursor selectLikes(String user){
+        Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE2 +" where "+ DbHelper.COLUMN_FROM+" IS \'" +user+"\' AND "+DbHelper.COLUMN_ACTION+" IS \'liked\'", null);
+        return cursor;
+    }
+    public Cursor selectLikers(String user){
+        Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE2 +" where "+ DbHelper.COLUMN_TO+" IS \'" +user+"\' AND "+DbHelper.COLUMN_ACTION+" IS \'liked\'", null);
+        return cursor;
+    }
+
     public Cursor selectAllMine(String user){
         Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE +" where "+ DbHelper.COLUMN_CREATOR+" IS \'" +user+"\'", null);
         return cursor;
