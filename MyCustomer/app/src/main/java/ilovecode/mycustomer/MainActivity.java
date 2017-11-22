@@ -67,12 +67,19 @@ public class MainActivity extends AppCompatActivity {
 
                 EditText editTextNames = (EditText) findViewById(R.id.EditText_Name);
                 String names = editTextNames.getText().toString();
+                if (names.equalsIgnoreCase("You")||names.equalsIgnoreCase("")){
+                    Toast.makeText(getApplicationContext(), "Invalid name try again", Toast.LENGTH_SHORT).show();
+                }else {
+                    EditText passwordds = (EditText) findViewById(R.id.EditText_password);
+                    String passwords = passwordds.getText().toString();
+                    if(db.insertUser(names, passwords)) {
+                        db.close();
+                        Toast.makeText(getApplicationContext(), "User " + names + " created!", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(getApplicationContext(), "Error creating user " + names + "!", Toast.LENGTH_SHORT).show();
 
-                EditText passwordds = (EditText) findViewById(R.id.EditText_password);
-                String passwords = passwordds.getText().toString();
-                db.insertUser(names, passwords);
-                db.close();
-                Toast.makeText(getApplicationContext(),"User "+names+" created!", Toast.LENGTH_SHORT).show();
+                    }
+                }
 
             }
         });

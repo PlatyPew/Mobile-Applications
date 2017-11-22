@@ -121,6 +121,9 @@ public class MainPage extends AppCompatActivity {
             case R.id.action_search:
                 startActivityForResult(new Intent(MainPage.this, Search.class), 4);
                 break;
+            case R.id.action_recent:
+                startActivityForResult(new Intent(MainPage.this, RecentPage.class), 4);
+                break;
             default:
                 break;
         }

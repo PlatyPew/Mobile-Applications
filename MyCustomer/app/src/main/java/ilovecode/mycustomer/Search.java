@@ -49,6 +49,9 @@ public class Search extends AppCompatActivity {
             case R.id.action_search:
                 startActivityForResult(new Intent(Search.this, Search.class), 4);
                 break;
+            case R.id.action_recent:
+                startActivityForResult(new Intent(Search.this, RecentPage.class), 4);
+                break;
             case android.R.id.home:
                 Intent data = new Intent();
                 // add data to Intent

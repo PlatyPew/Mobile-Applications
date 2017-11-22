@@ -17,8 +17,8 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String COLUMN_PERM = "PERM";
     public static final String TABLE2 ="LOGS";
     public static final String COLUMN_ID1 = "ID";
-    public static final String COLUMN_FROM = "FROM";
-    public static final String COLUMN_TO = "TO";
+    public static final String COLUMN_FROM = "FROMO";
+    public static final String COLUMN_TO = "TOO";
     public static final String COLUMN_NOTE = "NOTENAME";
     public static final String COLUMN_ACTION = "ACTION";
     public static final String COLUMN_TIME = "TIME";
@@ -27,7 +27,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
 
-    public static final String DB_NAME = "noteds.db";
+    public static final String DB_NAME = "notedsssS.db";
     private static final int DB_VER = 1;
     private static final String DB_CREATE = "CREATE TABLE "+ TABLE+
             " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT" +

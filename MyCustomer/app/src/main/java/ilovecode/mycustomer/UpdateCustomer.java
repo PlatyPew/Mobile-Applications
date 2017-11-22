@@ -99,6 +99,12 @@ public class UpdateCustomer extends AppCompatActivity {
                 db.open();
                 db.updateCustomer(id,nameee,noteee,descee,dates,user,perm);
                 Toast.makeText(v.getContext(), "edited one note", Toast.LENGTH_SHORT).show();
+
+
+                String dateee = dateFormat.format(datee);
+                db.open();
+                db.insertLog(user,user,name,"liked",dateee);
+                db.close();
                 db.close();
 
                 finish();

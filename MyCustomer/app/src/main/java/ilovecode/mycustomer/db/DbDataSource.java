@@ -51,7 +51,7 @@ public class DbDataSource {
         }
     }
 
-    public void insertUser(String user, String password) {
+    public boolean insertUser(String user, String password) {
         m_database.beginTransaction();
         try{
             ContentValues values = new ContentValues();
@@ -60,25 +60,32 @@ public class DbDataSource {
             m_database.insert(DbHelper.TABLE1, null, values);
 
             m_database.setTransactionSuccessful();
-        } finally {
+            return true;
+        }catch( Exception e){return false;} finally {
             m_database.endTransaction();
         }
     }
 
     public void insertLog(String from, String to, String note,String action, String time) {
-        m_database.beginTransaction();
-        try{
-            ContentValues values = new ContentValues();
-            values.put(DbHelper.COLUMN_FROM,from);
-            values.put(DbHelper.COLUMN_TO, to);
-            values.put(DbHelper.COLUMN_NOTE, note);
-            values.put(DbHelper.COLUMN_ACTION, action);
-            values.put(DbHelper.COLUMN_TIME, time);
-            m_database.insert(DbHelper.TABLE2, null, values);
 
-            m_database.setTransactionSuccessful();
-        } finally {
-            m_database.endTransaction();
+        if (likes(note,from)>0){
+            m_database.execSQL("DELETE FROM " + DbHelper.TABLE2 + " WHERE " + DbHelper.COLUMN_FROM+"=\'"+from+"\' and "+DbHelper.COLUMN_TO+"=\'"+to+"\' and "+DbHelper.COLUMN_NOTE+"=\'"+note+"\' and "+DbHelper.COLUMN_ACTION+"=\'"+action+"\' ");
+            //int success = m_database.delete(DbHelper.TABLE2,,new String[]{from,to,note,action});
+        }else {
+            m_database.beginTransaction();
+            try {
+                ContentValues values = new ContentValues();
+                values.put(DbHelper.COLUMN_FROM, from);
+                values.put(DbHelper.COLUMN_TO, to);
+                values.put(DbHelper.COLUMN_NOTE, note);
+                values.put(DbHelper.COLUMN_ACTION, action);
+                values.put(DbHelper.COLUMN_TIME, time);
+                m_database.insert(DbHelper.TABLE2, null, values);
+
+                m_database.setTransactionSuccessful();
+            } finally {
+                m_database.endTransaction();
+            }
         }
     }
     public Cursor login(String user, String password) {
@@ -101,8 +108,28 @@ public class DbDataSource {
         Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE2 +" where "+ DbHelper.COLUMN_FROM+" IS \'" +user+"\' AND "+DbHelper.COLUMN_ACTION+" IS \'liked\'", null);
         return cursor;
     }
+    public int likes(String user){
+        Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE2 +" where "+ DbHelper.COLUMN_NOTE+" IS \'" +user+"\' AND "+DbHelper.COLUMN_ACTION+" IS \'liked\'", null);
+        cursor.moveToFirst();
+        int k=0;
+        while (!cursor.isAfterLast()) {
+            k=k+1;
+            cursor.moveToNext();
+        }
+        return k;
+    }
+    public int likes(String note,String user){
+        Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE2 +" where "+ DbHelper.COLUMN_NOTE+" IS \'" +note+"\' AND "+DbHelper.COLUMN_ACTION+" IS \'liked\' AND "+DbHelper.COLUMN_FROM+" IS \'"+user+"\'", null);
+        cursor.moveToFirst();
+        int k=0;
+        while (!cursor.isAfterLast()) {
+            k=k+1;
+            cursor.moveToNext();
+        }
+        return k;
+    }
     public Cursor selectLikers(String user){
-        Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE2 +" where "+ DbHelper.COLUMN_TO+" IS \'" +user+"\' AND "+DbHelper.COLUMN_ACTION+" IS \'liked\'", null);
+        Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE2 +" where "+ DbHelper.COLUMN_TO+" IS \'" +user+"\'", null);
         return cursor;
     }
 

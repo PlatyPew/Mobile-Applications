@@ -56,9 +56,12 @@ public class ViewArrayAdapter extends RecyclerView.Adapter<ViewArrayAdapter.View
         TextView textView_desc = holder.textView_desc;
         TextView textView_date = holder.textView_date;
         TextView textView_creat = holder.textView_creat;
+        TextView textView_likes = holder.textView_likes;
+
         textView_desc.setText(customerArrayList.get(listPosition).getDesc());
         textView_date.setText(customerArrayList.get(listPosition).getDate());
         textView_name.setText(customerArrayList.get(listPosition).getName());
+        textView_likes.setText(Integer.toString(customerArrayList.get(listPosition).getLikes())+" likes");
         textView_creat.setText("Creator : "+customerArrayList.get(listPosition).getUser());
         //textView_mobileContact.setText(customerArrayList.get(listPosition).getNote());
     }
@@ -70,7 +73,10 @@ public class ViewArrayAdapter extends RecyclerView.Adapter<ViewArrayAdapter.View
         public TextView textView_desc;
         public TextView textView_date;
         public TextView textView_creat;
+        public TextView textView_likes;
+
         public Button button_view;
+        public Button button_star;
 
         private RecyclerViewClickListener mListener;
         public ViewHolder(View itemView, RecyclerViewClickListener listener) {
@@ -84,10 +90,13 @@ public class ViewArrayAdapter extends RecyclerView.Adapter<ViewArrayAdapter.View
             textView_desc = (TextView) itemView.findViewById(R.id.TextView_desc);
             textView_date = (TextView) itemView.findViewById(R.id.TextView_date);
             textView_creat = (TextView) itemView.findViewById(R.id.TextView_creator);
+            textView_likes = (TextView) itemView.findViewById(R.id.TextView_likes);
 
             button_view = (Button) itemView.findViewById(R.id.Button_view);
+            button_star = (Button) itemView.findViewById(R.id.Button_Star);
 
             button_view.setOnClickListener(this);
+            button_star.setOnClickListener(this);
 
 
         }

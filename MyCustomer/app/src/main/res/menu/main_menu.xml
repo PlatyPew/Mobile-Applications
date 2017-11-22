@@ -26,5 +26,5 @@
         android:id="@+id/action_recent"
         android:orderInCategory="100"
         app:showAsAction="always"
-        android:title="Recent"/>
+        android:title="recent"/>
 </menu>

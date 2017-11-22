@@ -53,10 +53,14 @@ public class AddCustomer extends AppCompatActivity {
 
                     perm="pr";
                 }
+
                 DbDataSource db = new DbDataSource(v.getContext());
                 Customer newCustomer = new Customer(0,name,note,date,desc,user,perm);
                 db.open();
                 db.insertCustomer(newCustomer);
+                String dateee = dateFormat.format(datee);
+                db.open();
+                db.insertLog(user,user,name,"created",dateee);
                 Toast.makeText(v.getContext(), "Saved one note", Toast.LENGTH_SHORT).show();
                 db.close();
 

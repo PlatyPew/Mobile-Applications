@@ -13,6 +13,7 @@ public class Customer {
     private String date;
     private String user;
     private String perm;
+    private int likes;
     //private String img;
 
     //I have provided a constructor so that it is easier to provide
@@ -35,6 +36,9 @@ public class Customer {
         return id;
     }
     public void setId(int inId) {this.id = inId;}
+
+    public int getLikes() {return likes;}
+    public void setLikes(int inId) {this.likes = inId;}
 
     //public String getImg() {return img;}
     //public void setImg(String inId) {this.img = img;}

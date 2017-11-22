@@ -16,7 +16,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import ilovecode.mycustomer.db.DbDataSource;
 
@@ -62,7 +65,16 @@ public class  ViewPage extends AppCompatActivity {
                         startActivityForResult(intent,5);
                         break;
                     case R.id.Button_Star : // if its button1
-
+                        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                        String user= pref.getString("name","name");
+                        DbDataSource db = new DbDataSource(ViewPage.this);
+                        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+                        Date datee = new Date();
+                        String dateee = dateFormat.format(datee);
+                        db.open();
+                        db.insertLog(user,name,contact,"liked",dateee);
+                        db.close();
+                        startActivity(getIntent());
                         break;
 
 
@@ -113,6 +125,10 @@ public class  ViewPage extends AppCompatActivity {
             case R.id.action_search:
                 startActivityForResult(new Intent(ViewPage.this, Search.class), 4);
                 break;
+            case R.id.action_recent:
+                startActivityForResult(new Intent(ViewPage.this, RecentPage.class), 4);
+                break;
+
             case android.R.id.home:
                 Intent data = new Intent();
                 // add data to Intent
@@ -144,6 +160,7 @@ public class  ViewPage extends AppCompatActivity {
         //I obtained these code from
         //https://stackoverflow.com/questions/10723770/whats-the-best-way-to-iterate-an-android-cursor
         cursor.moveToFirst();
+
         while (!cursor.isAfterLast()) {
             int id = cursor.getInt(cursor.getColumnIndex("_ID"));
             String name = cursor.getString(cursor.getColumnIndex("NAME"));
@@ -153,6 +170,7 @@ public class  ViewPage extends AppCompatActivity {
             String user = cursor.getString(cursor.getColumnIndex("USER"));
             String perm = cursor.getString(cursor.getColumnIndex("PERM"));
             oneCustomer = new Customer(id,name,note,date,desc,user,perm);
+            oneCustomer.setLikes(database.likes(name));
             m_customerArrayList.add(oneCustomer);
             cursor.moveToNext();
         }
