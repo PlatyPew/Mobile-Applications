@@ -2,34 +2,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_goto_add_customer"
+        android:id="@+id/action_showMore"
         android:orderInCategory="100"
         app:showAsAction="always"
-        android:title="Add"/>
-    <item
-        android:id="@+id/action_logout"
-        android:orderInCategory="100"
-        app:showAsAction="always"
-        android:title="LogOut"/>
-    <item
-        android:id="@+id/action_viewall"
-        android:orderInCategory="100"
-        app:showAsAction="always"
-        android:title="All"/>
-
-    <item
-        android:id="@+id/action_search"
-        android:orderInCategory="100"
-        app:showAsAction="always"
-        android:title="Search"/>
-    <item
-        android:id="@+id/action_recent"
-        android:orderInCategory="100"
-        app:showAsAction="always"
-        android:title="recent"/>
-    <item
-        android:id="@+id/action_about"
-        android:orderInCategory="100"
-        app:showAsAction="always"
-        android:title="About"/>
+        android:title="Show More"/>
 </menu>

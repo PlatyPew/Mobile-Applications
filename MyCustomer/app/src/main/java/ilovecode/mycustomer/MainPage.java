@@ -108,25 +108,16 @@ public class MainPage extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            // action with ID action_goto_add_customer was selected
-            case R.id.action_goto_add_customer:
-                startActivityForResult(new Intent(MainPage.this, AddCustomer.class), 4);
+            case R.id.action_showMore:
+                startActivityForResult(new Intent(MainPage.this, More.class), 4);
                 break;
-            case R.id.action_logout:
-                startActivityForResult(new Intent(MainPage.this, MainActivity.class), 4);
-                break;
-            case R.id.action_viewall:
-                startActivityForResult(new Intent(MainPage.this, ViewPage.class), 4);
-                break;
-            case R.id.action_search:
-                startActivityForResult(new Intent(MainPage.this, Search.class), 4);
-                break;
-            case R.id.action_recent:
-                startActivityForResult(new Intent(MainPage.this, RecentPage.class), 4);
-                break;
-            case R.id.action_about:
-                startActivityForResult(new Intent(MainPage.this, About.class),4);
-                break;
+            case android.R.id.home:
+                Intent data = new Intent();
+                // add data to Intent
+                setResult(Activity.RESULT_CANCELED, data);
+                Toast.makeText(getApplicationContext(),"Back button clicked", Toast.LENGTH_SHORT).show();
+                finish();
+                //Don't apply break statement. It will stop the home action.
             default:
                 break;
         }

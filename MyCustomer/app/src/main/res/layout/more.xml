@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <Button
+        android:id="@+id/add"
+        android:layout_width="356dp"
+        android:layout_height="wrap_content"
+        android:text="Add Notes"
+        tools:layout_editor_absoluteX="14dp"
+        tools:layout_editor_absoluteY="20dp" />
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="356dp"
+        android:layout_height="52dp"
+        android:text="Logout"
+        tools:layout_editor_absoluteX="14dp"
+        tools:layout_editor_absoluteY="80dp" />
+
+    <Button
+        android:id="@+id/all"
+        android:layout_width="356dp"
+        android:layout_height="wrap_content"
+        android:text="All"
+        tools:layout_editor_absoluteX="14dp"
+        tools:layout_editor_absoluteY="140dp" />
+
+    <Button
+        android:id="@+id/search"
+        android:layout_width="356dp"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        tools:layout_editor_absoluteX="14dp"
+        tools:layout_editor_absoluteY="200dp" />
+
+    <Button
+        android:id="@+id/recent"
+        android:layout_width="356dp"
+        android:layout_height="wrap_content"
+        android:text="Recent"
+        tools:layout_editor_absoluteX="14dp"
+        tools:layout_editor_absoluteY="260dp" />
+
+    <Button
+        android:id="@+id/about"
+        android:layout_width="356dp"
+        android:layout_height="wrap_content"
+        android:text="About"
+        tools:layout_editor_absoluteX="14dp"
+        tools:layout_editor_absoluteY="320dp" />
+</android.support.constraint.ConstraintLayout>

@@ -113,22 +113,9 @@ public class  ViewPage extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // action with ID action_goto_add_customer was selected
-            case R.id.action_goto_add_customer:
-                startActivityForResult(new Intent(ViewPage.this, AddCustomer.class), 4);
+            case R.id.action_showMore:
+                startActivityForResult(new Intent(ViewPage.this, More.class), 4);
                 break;
-            case R.id.action_logout:
-                startActivityForResult(new Intent(ViewPage.this, MainActivity.class), 4);
-                break;
-            case R.id.action_viewall:
-                startActivityForResult(new Intent(ViewPage.this, ViewPage.class), 4);
-                break;
-            case R.id.action_search:
-                startActivityForResult(new Intent(ViewPage.this, Search.class), 4);
-                break;
-            case R.id.action_recent:
-                startActivityForResult(new Intent(ViewPage.this, RecentPage.class), 4);
-                break;
-
             case android.R.id.home:
                 Intent data = new Intent();
                 // add data to Intent
