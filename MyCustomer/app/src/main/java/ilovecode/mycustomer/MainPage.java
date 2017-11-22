@@ -124,6 +124,9 @@ public class MainPage extends AppCompatActivity {
             case R.id.action_recent:
                 startActivityForResult(new Intent(MainPage.this, RecentPage.class), 4);
                 break;
+            case R.id.action_about:
+                startActivityForResult(new Intent(MainPage.this, About.class),4);
+                break;
             default:
                 break;
         }

@@ -27,4 +27,9 @@
         android:orderInCategory="100"
         app:showAsAction="always"
         android:title="recent"/>
+    <item
+        android:id="@+id/action_about"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:title="About"/>
 </menu>
