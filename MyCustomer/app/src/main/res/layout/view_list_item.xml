@@ -54,6 +54,24 @@
             android:layout_gravity="right"
             android:drawableRight="@android:drawable/star_big_on"
             android:padding="5dp"/>
+
+        <Button
+            android:id="@+id/Button_chat"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="right"
+
+            android:drawableRight="@android:drawable/sym_action_chat"
+            android:padding="5dp" />
+        <Button
+            android:id="@+id/Button_add"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="right"
+
+            android:drawableRight="@android:drawable/ic_menu_add"
+            android:padding="5dp" />
+
     </LinearLayout>
 
 </LinearLayout>

@@ -4,29 +4,29 @@ package ilovecode.mycustomer;
  */
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 
-public class ViewArrayAdapter extends RecyclerView.Adapter<ViewArrayAdapter.ViewHolder> {
+public class ChatArrayAdapter extends RecyclerView.Adapter<ChatArrayAdapter.ViewHolder> {
 
 
     private RecyclerViewClickListener mListener;
 
     //All methods in this adapter are required for a bare minimum recyclerview adapter
     private int listItemLayout;
-    private ArrayList<Customer> customerArrayList;
+    private String name;
+    private ArrayList<Chat> customerArrayList;
     // Constructor of the class
-    public ViewArrayAdapter(int layoutId, ArrayList<Customer> itemList, RecyclerViewClickListener listener) {
+    public ChatArrayAdapter(int layoutId, ArrayList<Chat> itemList, RecyclerViewClickListener listener, String name) {
         listItemLayout = layoutId;
         this.customerArrayList = itemList;
         this.mListener = listener;
+        this.name=name;
     }
 
 
@@ -51,33 +51,31 @@ public class ViewArrayAdapter extends RecyclerView.Adapter<ViewArrayAdapter.View
     public void onBindViewHolder(final ViewHolder holder, final int listPosition) {
         //This is where we place code so that the Android system can run them
         //to display the customer data inside each recyclerview rows.
-        TextView textView_name = holder.textView_name;
+        TextView textView_text = holder.textView_text;
         //TextView textView_mobileContact = holder.textView_mobileContact;
-        TextView textView_desc = holder.textView_desc;
         TextView textView_date = holder.textView_date;
-        TextView textView_creat = holder.textView_creat;
-        TextView textView_likes = holder.textView_likes;
+        TextView textView_name = holder.textView_name;
+        String note = customerArrayList.get(listPosition).getComment();
+        String from = customerArrayList.get(listPosition).getCreator();
 
-        textView_desc.setText(customerArrayList.get(listPosition).getDesc());
-        textView_date.setText(customerArrayList.get(listPosition).getDate());
-        textView_name.setText(customerArrayList.get(listPosition).getName());
-        textView_likes.setText(Integer.toString(customerArrayList.get(listPosition).getLikes())+" likes");
-        textView_creat.setText("Creator : "+customerArrayList.get(listPosition).getUser());
+        if (from.equals(name)){
+            from="You";
+        }
+        String total =note;
+        textView_date.setText(customerArrayList.get(listPosition).getTime());
+        textView_name.setText(from);
+        textView_text.setText(total);
+
         //textView_mobileContact.setText(customerArrayList.get(listPosition).getNote());
     }
 
+
+
     // Static inner class to initialize the views of rows
     static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        public TextView textView_text;
         public TextView textView_name;
-        //public TextView textView_mobileContact;
-        public TextView textView_desc;
         public TextView textView_date;
-        public TextView textView_creat;
-        public TextView textView_likes;
-
-        public Button button_view;
-        public Button button_star;
-        public Button button_chat;
 
         private RecyclerViewClickListener mListener;
         public ViewHolder(View itemView, RecyclerViewClickListener listener) {
@@ -87,26 +85,14 @@ public class ViewArrayAdapter extends RecyclerView.Adapter<ViewArrayAdapter.View
             //Get the three variables, textView_name, textView_mobileContact and
             //button_edit to reference the elements which are defined the the XML in
             //the customer_list_item.xml.
-            textView_name = (TextView) itemView.findViewById(R.id.TextView_Name);
-            textView_desc = (TextView) itemView.findViewById(R.id.TextView_desc);
+            textView_text= (TextView) itemView.findViewById(R.id.TextView_text);
+            textView_name= (TextView) itemView.findViewById(R.id.TextView_name);
             textView_date = (TextView) itemView.findViewById(R.id.TextView_date);
-            textView_creat = (TextView) itemView.findViewById(R.id.TextView_creator);
-            textView_likes = (TextView) itemView.findViewById(R.id.TextView_likes);
-
-            button_view = (Button) itemView.findViewById(R.id.Button_view);
-            button_star = (Button) itemView.findViewById(R.id.Button_Star);
-            button_chat = (Button) itemView.findViewById(R.id.Button_chat);
-
-            button_view.setOnClickListener(this);
-            button_star.setOnClickListener(this);
-            button_chat.setOnClickListener(this);
-
-
 
         }
         @Override
         public void onClick(View view) {
-            Log.d("onclick", "onClick " + getLayoutPosition() + " " + textView_name.getText());
+            //Log.d("onclick", "onClick " + getLayoutPosition() + " " + textView_name.getText());
             mListener.onClick(view, getAdapterPosition());
         }
 

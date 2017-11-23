@@ -88,7 +88,25 @@ public class  ViewPage extends AppCompatActivity {
                         db.close();
                         startActivity(getIntent());
                         break;
+                    case R.id.Button_chat : // if its button1
+                        intent = new Intent(ViewPage.this,ChatPage.class);
+                        intent.putExtra("ID", Integer.toString(id));
+                        intent.putExtra("NAME", name);
+                        System.out.println("ok");
+                        startActivityForResult(intent,5);
+                        break;
+                    case R.id.Button_add : // if its button1
+                        intent = new Intent(AddChat.this,ChatPage.class);
+                        intent.putExtra("ID", Integer.toString(id));
+                        intent.putExtra("NAME", name);
 
+                        intent.putExtra("NOTE", contact);
+                        intent.putExtra("DESCRIPTION", desc);
+                        intent.putExtra("DATE", date);
+                        intent.putExtra("PERM", perm);
+                        intent.putExtra("USER", users);
+                        startActivityForResult(intent,5);
+                        break;
 
 
                 }

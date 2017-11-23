@@ -105,11 +105,17 @@ public class DbDataSource {
         Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE+" where "+ DbHelper.COLUMN_PERM+" IS \'pu\'", null);
         return cursor;
     }
-    public Cursor search(String k){
-        Cursor cursor = m_database.rawQuery("SELECT * FROM " + DbHelper.TABLE+" WHERE ("+ DbHelper.COLUMN_ID+" LIKE \'"+k+"\' OR "+ DbHelper.COLUMN_NAME+" LIKE \'"+k+"\' OR "+ DbHelper.COLUMN_NOTES+" LIKE \'"+k+"\' OR "+ DbHelper.COLUMN_DESC+" LIKE \'"+k+"\' OR "+ DbHelper.COLUMN_CREATOR+" LIKE \'"+k+"\' OR "+ DbHelper.COLUMN_DATE+" LIKE \'"+k+"\' )AND "+ DbHelper.COLUMN_PERM+" IS \'pu\' ;", null);
+    public Cursor selectComments(int I){
+        Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE3+" where "+ DbHelper.COLUMN_ID1+" IS \'"+I+"\'", null);
         return cursor;
     }
-//change to make it not just returnn logs but to change logs to customer objects
+    public Cursor search(String k){
+        Cursor cursor = m_database.rawQuery("SELECT * FROM " + DbHelper.TABLE+" WHERE ("+ DbHelper.COLUMN_ID+" LIKE \'%"+k+"%\' OR "+ DbHelper.COLUMN_NAME+" LIKE \'%"+k+"%\' OR "+ DbHelper.COLUMN_NOTES+" LIKE \'%"+k+"%\' OR "+ DbHelper.COLUMN_DESC+" LIKE \'%"+k+"%\' OR "+ DbHelper.COLUMN_CREATOR+" LIKE \'%"+k+"%\' OR "+ DbHelper.COLUMN_DATE+" LIKE \'%"+k+"%\' )AND "+ DbHelper.COLUMN_PERM+" IS \'pu\' ;", null);
+        return cursor;
+    }
+
+
+    //change to make it not just returnn logs but to change logs to customer objects
     public int[] selectLikes(String user){
         Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE2 +" where "+ DbHelper.COLUMN_FROM+" IS \'" +user+"\' AND "+DbHelper.COLUMN_ACTION+" IS \'liked\'", null);
         cursor.moveToFirst();
