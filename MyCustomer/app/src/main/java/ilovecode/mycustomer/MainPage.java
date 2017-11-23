@@ -16,7 +16,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import ilovecode.mycustomer.db.DbDataSource;
 
@@ -42,12 +45,26 @@ public class MainPage extends AppCompatActivity {
                 String desc = selectedCustomerToUpdate.getDesc();
                 String date = selectedCustomerToUpdate.getDate();
                 String perm=selectedCustomerToUpdate.getPerm();
+                String users=selectedCustomerToUpdate.getUser();
 
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                String user= pref.getString("name","name");
+                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+                Date datee = new Date();
+                String dateee = dateFormat.format(datee);
                 Intent intent=null;
                 switch(view.getId())  //get the id of the view clicked. (in this case button)
                 {
                     case R.id.Button_view : // if its button1
-                         intent = new Intent(MainPage.this,ViewCustomer.class);
+
+                        DbDataSource db = new DbDataSource(MainPage.this);
+
+                        db.open();
+                        System.out.println(user+users+name+dateee);
+                        db.insertLog(user,users,name,"viewed",dateee,id);
+                        //(String from, String to, String note,String action, String time)
+                        db.close();
+                        intent = new Intent(MainPage.this,ViewCustomer.class);
 
                         intent.putExtra("ID", Integer.toString(id));
                         intent.putExtra("NAME", name);
@@ -72,10 +89,11 @@ public class MainPage extends AppCompatActivity {
 
 
 
+
                         startActivityForResult(intent,5);
                         break;
                     case R.id.Button_Delete:
-                        DbDataSource db = new DbDataSource(view.getContext());
+                        db = new DbDataSource(view.getContext());
                         db.open();
                         db.deleteCustomer(id);
                         finish();

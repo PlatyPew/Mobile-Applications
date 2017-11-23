@@ -103,7 +103,7 @@ public class UpdateCustomer extends AppCompatActivity {
 
                 String dateee = dateFormat.format(datee);
                 db.open();
-                db.insertLog(user,user,name,"liked",dateee);
+                db.insertLog(user,user,name,"liked",dateee,id);
                 db.close();
                 db.close();
 

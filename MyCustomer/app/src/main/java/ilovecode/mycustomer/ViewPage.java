@@ -45,12 +45,19 @@ public class  ViewPage extends AppCompatActivity {
                 String desc = selectedCustomerToUpdate.getDesc();
                 String date = selectedCustomerToUpdate.getDate();
                 String perm = selectedCustomerToUpdate.getPerm();
+                String users = selectedCustomerToUpdate.getUser();
 
-
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+                String user= pref.getString("name","name");
+                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+                Date datee = new Date();
+                String dateee = dateFormat.format(datee);
                 Intent intent=null;
+                DbDataSource db = new DbDataSource(ViewPage.this);
                 switch(view.getId())  //get the id of the view clicked. (in this case button)
                 {
                     case R.id.Button_view : // if its button1
+
                         intent = new Intent(ViewPage.this,ViewCustomer.class);
 
                         intent.putExtra("ID", Integer.toString(id));
@@ -59,20 +66,25 @@ public class  ViewPage extends AppCompatActivity {
                         intent.putExtra("DESCRIPTION", desc);
                         intent.putExtra("DATE", date);
                         intent.putExtra("PERM", perm);
+                        intent.putExtra("USER", users);
 
+
+                        db.open();
+                        System.out.println(user+users+name+dateee);
+                        db.insertLog(user,users,name,"viewed",dateee,id);
+                        //(String from, String to, String note,String action, String time)
+                        db.close();
 
 
                         startActivityForResult(intent,5);
                         break;
                     case R.id.Button_Star : // if its button1
-                        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
-                        String user= pref.getString("name","name");
-                        DbDataSource db = new DbDataSource(ViewPage.this);
-                        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-                        Date datee = new Date();
-                        String dateee = dateFormat.format(datee);
+                        db = new DbDataSource(ViewPage.this);
+
                         db.open();
-                        db.insertLog(user,name,contact,"liked",dateee);
+                        System.out.println(user+users+name+dateee);
+                        db.insertLog(user,users,name,"liked",dateee,id);
+                        //(String from, String to, String note,String action, String time)
                         db.close();
                         startActivity(getIntent());
                         break;
@@ -138,30 +150,84 @@ public class  ViewPage extends AppCompatActivity {
         database.open();
         //The following command will retrieve all data from the database
         Cursor cursor = database.selectAllCustomers();
-        if (n!="" && n!=null){
-            cursor = database.search(n);
+        String view=getIntent().getStringExtra("VIEW");
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+        String userz= pref.getString("name","name");
+        System.out.println(view);
+        switch(view)  //get the id of the view clicked. (in this case button)
+        {
+            case "LIKE" : // if its button1
+                int[] k= database.selectLikes(userz);
+                cursor=database.selectCustomers(k);
+                int kk=k.length;
+                cursor.moveToFirst();
+
+                while (!cursor.isAfterLast()) {
+                    int id = cursor.getInt(cursor.getColumnIndex("_ID"));
+                    String name = cursor.getString(cursor.getColumnIndex("NAME"));
+                    String note = cursor.getString(cursor.getColumnIndex("NOTES"));
+                    String desc = cursor.getString(cursor.getColumnIndex("DESC"));
+                    String date = cursor.getString(cursor.getColumnIndex("DATE"));
+                    String user = cursor.getString(cursor.getColumnIndex("USER"));
+                    String perm = cursor.getString(cursor.getColumnIndex("PERM"));
+                    oneCustomer = new Customer(id,name,note,date,desc,user,perm);
+                    oneCustomer.setLikes(database.likes(name));
+                    m_customerArrayList.add(oneCustomer);
+                    cursor.moveToNext();
+                }
+                database.open();
+                break;
+            case "ALL" : // if its button1
+                cursor.moveToFirst();
+
+                while (!cursor.isAfterLast()) {
+                    int id = cursor.getInt(cursor.getColumnIndex("_ID"));
+                    String name = cursor.getString(cursor.getColumnIndex("NAME"));
+                    String note = cursor.getString(cursor.getColumnIndex("NOTES"));
+                    String desc = cursor.getString(cursor.getColumnIndex("DESC"));
+                    String date = cursor.getString(cursor.getColumnIndex("DATE"));
+                    String user = cursor.getString(cursor.getColumnIndex("USER"));
+                    String perm = cursor.getString(cursor.getColumnIndex("PERM"));
+                    oneCustomer = new Customer(id,name,note,date,desc,user,perm);
+                    oneCustomer.setLikes(database.likes(name));
+                    m_customerArrayList.add(oneCustomer);
+                    cursor.moveToNext();
+                }
+                database.close();
+                break;
+            case "SEARCH" : // if its button1
+                cursor = database.search(n);
+                cursor.moveToFirst();
+
+                while (!cursor.isAfterLast()) {
+                    int id = cursor.getInt(cursor.getColumnIndex("_ID"));
+                    String name = cursor.getString(cursor.getColumnIndex("NAME"));
+                    String note = cursor.getString(cursor.getColumnIndex("NOTES"));
+                    String desc = cursor.getString(cursor.getColumnIndex("DESC"));
+                    String date = cursor.getString(cursor.getColumnIndex("DATE"));
+                    String user = cursor.getString(cursor.getColumnIndex("USER"));
+                    String perm = cursor.getString(cursor.getColumnIndex("PERM"));
+                    oneCustomer = new Customer(id,name,note,date,desc,user,perm);
+                    oneCustomer.setLikes(database.likes(name));
+                    m_customerArrayList.add(oneCustomer);
+                    cursor.moveToNext();
+                }
+                cursor.close();
+                database.close();
+                break;
+
+
+
         }
+
+
+
         //The following block of code is frequently used by developers to
         //(1)loop through one record at a time and (2) quickily display in a TextView
         //to have some assurance that the database has the records.
         //I obtained these code from
         //https://stackoverflow.com/questions/10723770/whats-the-best-way-to-iterate-an-android-cursor
-        cursor.moveToFirst();
 
-        while (!cursor.isAfterLast()) {
-            int id = cursor.getInt(cursor.getColumnIndex("_ID"));
-            String name = cursor.getString(cursor.getColumnIndex("NAME"));
-            String note = cursor.getString(cursor.getColumnIndex("NOTES"));
-            String desc = cursor.getString(cursor.getColumnIndex("DESC"));
-            String date = cursor.getString(cursor.getColumnIndex("DATE"));
-            String user = cursor.getString(cursor.getColumnIndex("USER"));
-            String perm = cursor.getString(cursor.getColumnIndex("PERM"));
-            oneCustomer = new Customer(id,name,note,date,desc,user,perm);
-            oneCustomer.setLikes(database.likes(name));
-            m_customerArrayList.add(oneCustomer);
-            cursor.moveToNext();
-        }
-        database.close();
         //After executing the code inside loadData() method, need to close the database
     }
 

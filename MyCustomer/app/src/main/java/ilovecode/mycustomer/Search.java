@@ -27,6 +27,7 @@ public class Search extends AppCompatActivity {
                         Toast.makeText(view.getContext(), "Searched for: " + searchString, Toast.LENGTH_SHORT).show();
                         Intent intent=new Intent(Search.this, ViewPage.class);
                         intent.putExtra("SEARCH", searchString);
+                        intent.putExtra("VIEW", "SEARCH");
                         startActivityForResult(intent,5);
                         break;
                 }

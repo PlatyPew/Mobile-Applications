@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ilovecode.mycustomer.Customer;
 
 public class DbDataSource {
@@ -66,9 +69,9 @@ public class DbDataSource {
         }
     }
 
-    public void insertLog(String from, String to, String note,String action, String time) {
+    public void insertLog(String from, String to, String note,String action, String time,int id) {
 
-        if (likes(note,from)>0){
+        if (likes(note,from)>0 && action.equals("liked")){
             m_database.execSQL("DELETE FROM " + DbHelper.TABLE2 + " WHERE " + DbHelper.COLUMN_FROM+"=\'"+from+"\' and "+DbHelper.COLUMN_TO+"=\'"+to+"\' and "+DbHelper.COLUMN_NOTE+"=\'"+note+"\' and "+DbHelper.COLUMN_ACTION+"=\'"+action+"\' ");
             //int success = m_database.delete(DbHelper.TABLE2,,new String[]{from,to,note,action});
         }else {
@@ -80,10 +83,13 @@ public class DbDataSource {
                 values.put(DbHelper.COLUMN_NOTE, note);
                 values.put(DbHelper.COLUMN_ACTION, action);
                 values.put(DbHelper.COLUMN_TIME, time);
+                values.put(DbHelper.COLUMN_ID, id);
                 m_database.insert(DbHelper.TABLE2, null, values);
 
                 m_database.setTransactionSuccessful();
-            } finally {
+            } catch (Exception e){
+                System.out.println(e);
+            }finally {
                 m_database.endTransaction();
             }
         }
@@ -103,10 +109,28 @@ public class DbDataSource {
         Cursor cursor = m_database.rawQuery("SELECT * FROM " + DbHelper.TABLE+" WHERE ("+ DbHelper.COLUMN_ID+" LIKE \'"+k+"\' OR "+ DbHelper.COLUMN_NAME+" LIKE \'"+k+"\' OR "+ DbHelper.COLUMN_NOTES+" LIKE \'"+k+"\' OR "+ DbHelper.COLUMN_DESC+" LIKE \'"+k+"\' OR "+ DbHelper.COLUMN_CREATOR+" LIKE \'"+k+"\' OR "+ DbHelper.COLUMN_DATE+" LIKE \'"+k+"\' )AND "+ DbHelper.COLUMN_PERM+" IS \'pu\' ;", null);
         return cursor;
     }
-
-    public Cursor selectLikes(String user){
+//change to make it not just returnn logs but to change logs to customer objects
+    public int[] selectLikes(String user){
         Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE2 +" where "+ DbHelper.COLUMN_FROM+" IS \'" +user+"\' AND "+DbHelper.COLUMN_ACTION+" IS \'liked\'", null);
-        return cursor;
+        cursor.moveToFirst();
+        //int [] k={};
+        List<Integer> myList = new ArrayList<Integer>();
+
+        int kk=0;
+        while (!cursor.isAfterLast()) {
+            int id = cursor.getInt(cursor.getColumnIndex(DbHelper.COLUMN_ID));
+
+            myList.add(id);
+            kk=kk+1;
+            System.out.println(id);
+            cursor.moveToNext();
+        }
+        int[] k = new int[myList.size()];
+        for (int i = 0; i < k.length; i++) {
+            k[i] = myList.get(i);
+        }
+
+        return k;
     }
     public int likes(String user){
         Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE2 +" where "+ DbHelper.COLUMN_NOTE+" IS \'" +user+"\' AND "+DbHelper.COLUMN_ACTION+" IS \'liked\'", null);
@@ -126,12 +150,17 @@ public class DbDataSource {
             k=k+1;
             cursor.moveToNext();
         }
+        cursor.close();
         return k;
     }
     public Cursor selectLikers(String user){
         Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE2 +" where "+ DbHelper.COLUMN_TO+" IS \'" +user+"\'", null);
         return cursor;
     }
+    /*public Cursor selectLikes(String user){
+        Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE2 +" where "+ DbHelper.COLUMN_FROM+" IS \'" +user+"\' AND " + DbHelper.COLUMN_ACTION + " IS \'liked\'", null);
+        return cursor;
+    }*/
 
     public Cursor selectAllMine(String user){
         Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE +" where "+ DbHelper.COLUMN_CREATOR+" IS \'" +user+"\'", null);
@@ -143,6 +172,19 @@ public class DbDataSource {
                 + DbHelper.COLUMN_ID+" = " + inId, null);
         return cursor;
     }
+    public Cursor selectCustomers(int[] inId){
+        String query="SELECT * FROM "+DbHelper.TABLE+" WHERE "+DbHelper.COLUMN_ID+" IN (";
+        for (int i=0;i<inId.length;i++){
+            query=query+" "+inId[i]+" ";
+            if((i+1)<inId.length){
+                query=query+",";
+            }
+        }
+        query=query+")";
+        Cursor cursor = m_database.rawQuery(query, null);
+        return cursor;
+    }
+
 
     //update
     public boolean updateCustomer(int inId, String inName, String notes,String desc, String date, String user,String perm){

@@ -59,8 +59,7 @@ public class AddCustomer extends AppCompatActivity {
                 db.open();
                 db.insertCustomer(newCustomer);
                 String dateee = dateFormat.format(datee);
-                db.open();
-                db.insertLog(user,user,name,"created",dateee);
+                db.insertLog(user,user,name,"created",dateee,0);
                 Toast.makeText(v.getContext(), "Saved one note", Toast.LENGTH_SHORT).show();
                 db.close();
 

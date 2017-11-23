@@ -2,6 +2,7 @@ package ilovecode.mycustomer;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -21,6 +22,7 @@ public class More extends AppCompatActivity implements View.OnClickListener{
         Button searchBtn = (Button)findViewById(R.id.search);
         Button recentBtn = (Button)findViewById(R.id.recent);
         Button aboutBtn = (Button)findViewById(R.id.about);
+        Button likesBtn = (Button)findViewById(R.id.likes);
 
         addBtn.setOnClickListener(this);
         logoutBtn.setOnClickListener(this);
@@ -28,6 +30,7 @@ public class More extends AppCompatActivity implements View.OnClickListener{
         searchBtn.setOnClickListener(this);
         recentBtn.setOnClickListener(this);
         aboutBtn.setOnClickListener(this);
+        likesBtn.setOnClickListener(this);
     }
 
     @Override
@@ -40,7 +43,9 @@ public class More extends AppCompatActivity implements View.OnClickListener{
                 startActivityForResult(new Intent(More.this, MainActivity.class), 4);
                 break;
             case R.id.all:
-                startActivityForResult(new Intent(More.this, ViewPage.class), 4);
+                Intent intent=new Intent(More.this, ViewPage.class);
+                intent.putExtra("VIEW", "ALL");
+                startActivityForResult(intent,5);
                 break;
             case R.id.search:
                 startActivityForResult(new Intent(More.this, Search.class), 4);
@@ -50,6 +55,11 @@ public class More extends AppCompatActivity implements View.OnClickListener{
                 break;
             case R.id.about:
                 startActivityForResult(new Intent(More.this, About.class),4);
+                break;
+            case R.id.likes:
+                Intent intentS=new Intent(More.this, ViewPage.class);
+                intentS.putExtra("VIEW", "LIKE");
+                startActivityForResult(intentS,5);
                 break;
             case android.R.id.home:
                 Intent data = new Intent();

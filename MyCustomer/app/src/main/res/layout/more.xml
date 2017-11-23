@@ -1,55 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:id="@+id/scrollView_AddCustomerForm"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="fill_parent">
 
-    <Button
-        android:id="@+id/add"
-        android:layout_width="356dp"
-        android:layout_height="wrap_content"
-        android:text="Add Notes"
-        tools:layout_editor_absoluteX="14dp"
-        tools:layout_editor_absoluteY="20dp" />
+        <Button
+            android:id="@+id/add"
+            android:layout_height="wrap_content"
 
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="356dp"
-        android:layout_height="52dp"
-        android:text="Logout"
-        tools:layout_editor_absoluteX="14dp"
-        tools:layout_editor_absoluteY="80dp" />
+            android:layout_width="match_parent"
+            android:text="Add Notes"
+            />
 
-    <Button
-        android:id="@+id/all"
-        android:layout_width="356dp"
-        android:layout_height="wrap_content"
-        android:text="All"
-        tools:layout_editor_absoluteX="14dp"
-        tools:layout_editor_absoluteY="140dp" />
+        <Button
+            android:id="@+id/logout"
+            android:layout_height="wrap_content"
 
-    <Button
-        android:id="@+id/search"
-        android:layout_width="356dp"
-        android:layout_height="wrap_content"
-        android:text="Search"
-        tools:layout_editor_absoluteX="14dp"
-        tools:layout_editor_absoluteY="200dp" />
+            android:layout_width="match_parent"
+            android:text="Logout"
+            />
 
-    <Button
-        android:id="@+id/recent"
-        android:layout_width="356dp"
-        android:layout_height="wrap_content"
-        android:text="Recent"
-        tools:layout_editor_absoluteX="14dp"
-        tools:layout_editor_absoluteY="260dp" />
+        <Button
+            android:id="@+id/all"
+            android:layout_height="wrap_content"
 
-    <Button
-        android:id="@+id/about"
-        android:layout_width="356dp"
-        android:layout_height="wrap_content"
-        android:text="About"
-        tools:layout_editor_absoluteX="14dp"
-        tools:layout_editor_absoluteY="320dp" />
-</android.support.constraint.ConstraintLayout>
+            android:layout_width="match_parent"
+            android:text="All"
+             />
+
+        <Button
+            android:id="@+id/search"
+            android:layout_height="wrap_content"
+
+            android:layout_width="match_parent"
+            android:text="Search"
+            />
+
+        <Button
+            android:id="@+id/recent"
+            android:layout_height="wrap_content"
+
+            android:layout_width="match_parent"
+            android:text="Recent"
+            />
+
+        <Button
+            android:id="@+id/about"
+            android:layout_height="wrap_content"
+
+            android:layout_width="match_parent"
+            android:text="About"
+            />
+        <Button
+            android:id="@+id/likes"
+            android:layout_height="wrap_content"
+
+            android:layout_width="match_parent"
+            android:text="Likes"
+            /> </LinearLayout>
+
+
+</ScrollView>

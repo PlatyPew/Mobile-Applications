@@ -27,7 +27,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
 
-    public static final String DB_NAME = "notedsssS.db";
+    public static final String DB_NAME = "noting.db";
     private static final int DB_VER = 1;
     private static final String DB_CREATE = "CREATE TABLE "+ TABLE+
             " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT" +
@@ -43,11 +43,12 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final String DB_CREATE2 = "CREATE TABLE "+ TABLE2+
             " (" + COLUMN_ID1 + " INTEGER PRIMARY KEY AUTOINCREMENT" +
             ", " + COLUMN_FROM + " TEXT " +
+            ", " + COLUMN_ID + " INTEGER " +
             ", " + COLUMN_TO + " TEXT "+
             ", " + COLUMN_NOTE + " TEXT " +
             ", " + COLUMN_ACTION + " TEXT " +
             ", " + COLUMN_TIME + " TEXT )";
-
+//add note primary key in db2
 
     public DbHelper(Context context){
         super(context, DB_NAME, null, DB_VER);

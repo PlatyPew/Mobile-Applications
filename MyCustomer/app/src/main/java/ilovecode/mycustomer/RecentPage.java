@@ -44,7 +44,7 @@ public class RecentPage extends AppCompatActivity {
                 //String to = selectedCustomerToUpdate.getTo();
                 String from = selectedCustomerToUpdate.getFrom();
 
-                //
+
                 String time = selectedCustomerToUpdate.getTime();
                 String total =from+" "+action+" your "+notename+".";
 
@@ -111,12 +111,13 @@ public class RecentPage extends AppCompatActivity {
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
             int id = cursor.getInt(cursor.getColumnIndex("ID"));
-            String name = cursor.getString(cursor.getColumnIndex("TOO"));
-            String note = cursor.getString(cursor.getColumnIndex("FROMO"));
-            String desc = cursor.getString(cursor.getColumnIndex("NOTENAME"));
-            String date = cursor.getString(cursor.getColumnIndex("ACTION"));
-            String user = cursor.getString(cursor.getColumnIndex("TIME"));
-            oneCustomer = new Log(id,name,note,desc,date,user);
+            String to = cursor.getString(cursor.getColumnIndex("TOO"));
+            String from = cursor.getString(cursor.getColumnIndex("FROMO"));
+            String note = cursor.getString(cursor.getColumnIndex("NOTENAME"));
+            String action = cursor.getString(cursor.getColumnIndex("ACTION"));
+            String time = cursor.getString(cursor.getColumnIndex("TIME"));
+            oneCustomer = new Log(id,to,from,note,action,time);
+            //int inId, String to, String from, String notes, String action, String time){//,
             m_customerArrayList.add(oneCustomer);
             cursor.moveToNext();
         }
