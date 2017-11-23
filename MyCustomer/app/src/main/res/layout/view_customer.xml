@@ -16,35 +16,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Name"
-            android:textSize="20pt">
+            android:textSize="20pt"
+            android:padding="5dp">
         </TextView>
         <TextView
             android:id="@+id/EditText_Date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Date"
-            android:textSize="11pt">
+            android:textSize="11pt"
+            android:padding="5dp">
         </TextView>
         <TextView
             android:id="@+id/EditText_creator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Creator"
-            android:textSize="10pt">
+            android:textSize="10pt"
+            android:padding="5dp">
         </TextView>
         <TextView
             android:id="@+id/EditText_Desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Description"
-            android:textSize="12pt">
+            android:textSize="12pt"
+            android:padding="5dp">
         </TextView>
         <TextView
             android:id="@+id/EditText_note"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Note Text"
-            android:textSize="10pt">
+            android:textSize="10pt"
+            android:padding="5dp">
         </TextView>
 
 

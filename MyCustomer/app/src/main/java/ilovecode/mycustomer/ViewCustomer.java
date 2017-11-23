@@ -43,18 +43,18 @@ public class ViewCustomer extends AppCompatActivity {
         //After collecting the data, the data is used to display inside
         //the correct controls.
         TextView editTextName= (TextView)findViewById(R.id.EditText_Name);
-        editTextName.setText("Name : "+name);
+        editTextName.setText(name);
 
         TextView editTextMobileContact= (TextView)findViewById(R.id.EditText_note);
         editTextMobileContact.setText(note);
         TextView editTextdesc= (TextView)findViewById(R.id.EditText_Desc);
-        editTextdesc.setText("Description : "+desc);
+        editTextdesc.setText("Description: "+desc);
         TextView editTextdate= (TextView)findViewById(R.id.EditText_Date);
         editTextdate.setText(date);
         //SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
         //String user= pref.getString("name","name");
         TextView creat= (TextView)findViewById(R.id.EditText_creator);
-        creat.setText("Created by :"+user);
+        creat.setText("Created by: "+user);
 
 
 
