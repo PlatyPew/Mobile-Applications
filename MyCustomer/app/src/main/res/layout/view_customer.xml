@@ -10,46 +10,55 @@
         android:orientation="vertical"
         android:layout_height="fill_parent">
 
-
         <TextView
             android:id="@+id/EditText_Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name"
-            android:textSize="20pt"
-            android:padding="5dp">
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="Name"
+            android:textColor="#3D86CF"
+            android:textSize="30sp">
         </TextView>
+
+        <TextView
+            android:id="@+id/EditText_Desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="Description"
+            android:textColor="#000000"
+            android:textSize="20sp" >
+        </TextView>
+
         <TextView
             android:id="@+id/EditText_Date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Date"
-            android:textSize="11pt"
-            android:padding="5dp">
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="Date"
+            android:textSize="15sp">
         </TextView>
         <TextView
             android:id="@+id/EditText_creator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Creator"
-            android:textSize="10pt"
-            android:padding="5dp">
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="Creator"
+            android:textSize="15sp">
         </TextView>
-        <TextView
-            android:id="@+id/EditText_Desc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Description"
-            android:textSize="12pt"
-            android:padding="5dp">
-        </TextView>
+
         <TextView
             android:id="@+id/EditText_note"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Note Text"
-            android:textSize="10pt"
-            android:padding="5dp">
+            android:text="Note Text"
+            android:textSize="20sp"
+            android:padding="5dp"
+            android:textColor="#474747">
         </TextView>
 
 

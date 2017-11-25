@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -35,6 +37,15 @@ public class Search extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //Reference: http://www.vogella.com/tutorials/AndroidActionBar/article.html
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }//End of onCreateOptionsMenu
+
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // action with ID action_goto_add_customer was selected
@@ -53,6 +64,7 @@ public class Search extends AppCompatActivity {
         }
         return true;
     }//End of onOptionsItemSelected(...)
+
     @Override
     public void onBackPressed() {
         Intent data = new Intent();
@@ -60,6 +72,4 @@ public class Search extends AppCompatActivity {
         setResult(Activity.RESULT_CANCELED, data);
         super.onBackPressed();
     }
-
-
 }

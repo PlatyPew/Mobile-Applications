@@ -1,16 +1,9 @@
 package ilovecode.mycustomer;
-/**
- * Created by Ah Tan on 1/11/17.
- */
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -32,8 +25,6 @@ public class RecentArrayAdapter extends RecyclerView.Adapter<RecentArrayAdapter.
         this.mListener = listener;
         this.name=name;
     }
-
-
 
     // get the size of the list
     @Override
@@ -72,8 +63,6 @@ public class RecentArrayAdapter extends RecyclerView.Adapter<RecentArrayAdapter.
         //textView_mobileContact.setText(customerArrayList.get(listPosition).getNote());
     }
 
-
-
     // Static inner class to initialize the views of rows
     static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView textView_text;
@@ -98,12 +87,5 @@ public class RecentArrayAdapter extends RecyclerView.Adapter<RecentArrayAdapter.
             //Log.d("onclick", "onClick " + getLayoutPosition() + " " + textView_name.getText());
             mListener.onClick(view, getAdapterPosition());
         }
-
-
-
     }
-
-
-
-
 }

@@ -46,14 +46,12 @@ public class MainActivity extends AppCompatActivity {
                      editor.putString("name", name);
 
                      editor.commit(); // commit changes
-                     Toast.makeText(getApplicationContext(),"Logged in!", Toast.LENGTH_SHORT).show();
+                     Toast.makeText(getApplicationContext(),"Welcome " + name + "!", Toast.LENGTH_SHORT).show();
 
                      Intent intent = new Intent(MainActivity.this, MainPage.class);
                      startActivityForResult(intent, 5);
                 } else {
-                     Toast.makeText(getApplicationContext(),"Wrong username or password", Toast.LENGTH_SHORT).show();
-
-
+                     Toast.makeText(getApplicationContext(),"Wrong username or password!", Toast.LENGTH_SHORT).show();
                  }
                 db.close();
             }

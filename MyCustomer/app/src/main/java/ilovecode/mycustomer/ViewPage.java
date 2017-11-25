@@ -95,6 +95,7 @@ public class  ViewPage extends AppCompatActivity {
                         System.out.println("ok");
                         startActivityForResult(intent,5);
                         break;
+                    /*
                     case R.id.Button_add : // if its button1
                         intent = new Intent(AddChat.this,ChatPage.class);
                         intent.putExtra("ID", Integer.toString(id));
@@ -107,8 +108,7 @@ public class  ViewPage extends AppCompatActivity {
                         intent.putExtra("USER", users);
                         startActivityForResult(intent,5);
                         break;
-
-
+                    */
                 }
 
 

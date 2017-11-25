@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,6 +33,9 @@ public class MainPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(false);
+
         // Initializing list view with the custom adapter
         m_customerArrayList = new ArrayList<Customer>();
         RecyclerViewClickListener listener = new RecyclerViewClickListener() {
@@ -56,39 +60,30 @@ public class MainPage extends AppCompatActivity {
                 switch(view.getId())  //get the id of the view clicked. (in this case button)
                 {
                     case R.id.Button_view : // if its button1
-
                         DbDataSource db = new DbDataSource(MainPage.this);
-
                         db.open();
                         System.out.println(user+users+name+dateee);
                         db.insertLog(user,users,name,"viewed",dateee,id);
                         //(String from, String to, String note,String action, String time)
                         db.close();
                         intent = new Intent(MainPage.this,ViewCustomer.class);
-
                         intent.putExtra("ID", Integer.toString(id));
                         intent.putExtra("NAME", name);
                         intent.putExtra("NOTE", contact);
                         intent.putExtra("DESCRIPTION", desc);
                         intent.putExtra("DATE", date);
                         intent.putExtra("PERM", perm);
-
-
 
                         startActivityForResult(intent,5);
                         break;
                     case R.id.Button_Edit : // if its button1
                         intent = new Intent(MainPage.this,UpdateCustomer.class);
-
                         intent.putExtra("ID", Integer.toString(id));
                         intent.putExtra("NAME", name);
                         intent.putExtra("NOTE", contact);
                         intent.putExtra("DESCRIPTION", desc);
                         intent.putExtra("DATE", date);
                         intent.putExtra("PERM", perm);
-
-
-
 
                         startActivityForResult(intent,5);
                         break;
@@ -113,7 +108,6 @@ public class MainPage extends AppCompatActivity {
 
         loadData();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

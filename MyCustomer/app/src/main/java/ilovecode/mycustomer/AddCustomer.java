@@ -34,17 +34,26 @@ public class AddCustomer extends AppCompatActivity {
                 //use the getText() which belongs to the editTextName to grab the user input
                 EditText editTextName= (EditText)findViewById(R.id.EditText_Name);
                 String name = editTextName.getText().toString();
+                if (name.equals("")) {
+                    name = "Untitled";
+                }
                 String perm ="pu";
                 EditText notee= (EditText)findViewById(R.id.EditText_note);
                 String note = notee.getText().toString();
+                if (note.equals("")) {
+                    note = "Empty like my soul";
+                }
 
                 EditText descc= (EditText)findViewById(R.id.EditText_Desc);
                 String desc = descc.getText().toString();
+                if (desc.equals("")) {
+                    desc = "No Description";
+                }
 
                 //EditText datee= (EditText)findViewById(R.id.EditText_Date);
-                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+                DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
                 Date datee = new Date();
-                String date = "Created on: "+dateFormat.format(datee);
+                String date = dateFormat.format(datee);
 
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
                 String user= pref.getString("name","name");
