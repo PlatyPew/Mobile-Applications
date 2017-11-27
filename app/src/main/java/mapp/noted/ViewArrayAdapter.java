@@ -84,7 +84,7 @@ public class ViewArrayAdapter extends RecyclerView.Adapter<ViewArrayAdapter.View
 
         public Button button_view;
         public Button button_star;
-        public Button button_chat;
+        //public Button button_chat;
 
         private RecyclerViewClickListener mListener;
         public ViewHolder(View itemView, RecyclerViewClickListener listener) {
@@ -102,11 +102,11 @@ public class ViewArrayAdapter extends RecyclerView.Adapter<ViewArrayAdapter.View
 
             button_view = (Button) itemView.findViewById(R.id.Button_view);
             button_star = (Button) itemView.findViewById(R.id.Button_Star);
-            button_chat = (Button) itemView.findViewById(R.id.Button_chat);
+            //button_chat = (Button) itemView.findViewById(R.id.Button_chat);
 
             button_view.setOnClickListener(this);
             button_star.setOnClickListener(this);
-            button_chat.setOnClickListener(this);
+            //button_chat.setOnClickListener(this);
         }
         @Override
         public void onClick(View view) {

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <Button
+        android:id="@+id/jan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="January"/>
+
+    <Button
+        android:id="@+id/feb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Feburary" />
+
+    <Button
+        android:id="@+id/mar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="March" />
+
+    <Button
+    android:id="@+id/apr"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Button" />
+
+    <Button
+    android:id="@+id/may"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Button" />
+
+    <Button
+    android:id="@+id/jun"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Button" />
+
+    <Button
+    android:id="@+id/jul"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Button" />
+
+    <Button
+    android:id="@+id/aug"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Button" />
+
+    <Button
+    android:id="@+id/sep"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Button" />
+
+    <Button
+    android:id="@+id/oct"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Button" />
+
+    <Button
+        android:id="@+id/nov"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+    <Button
+        android:id="@+id/dec"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button" />
+
+</LinearLayout>

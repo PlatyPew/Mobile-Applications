@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ public class More extends AppCompatActivity implements View.OnClickListener{
         Button recentBtn = (Button)findViewById(R.id.recent);
         Button aboutBtn = (Button)findViewById(R.id.about);
         Button likesBtn = (Button)findViewById(R.id.likes);
+        Button monthBtn = (Button)findViewById(R.id.month);
 
         addBtn.setOnClickListener(this);
         logoutBtn.setOnClickListener(this);
@@ -30,6 +32,7 @@ public class More extends AppCompatActivity implements View.OnClickListener{
         recentBtn.setOnClickListener(this);
         aboutBtn.setOnClickListener(this);
         likesBtn.setOnClickListener(this);
+        monthBtn.setOnClickListener(this);
     }
 
     @Override
@@ -60,10 +63,10 @@ public class More extends AppCompatActivity implements View.OnClickListener{
                 intentS.putExtra("VIEW", "LIKE");
                 startActivityForResult(intentS,5);
                 break;
-            case R.id.trending:
-                Intent intentS1 = new Intent(More.this, ViewPage.class);
-                intentS1.putExtra("VIEW", "trend");
-                startActivityForResult(intentS1,5);
+            case R.id.month:
+                Intent intentMonth = new Intent(More.this, MonthPage.class);
+                intentMonth.putExtra("VIEW", "MONTH");
+                startActivityForResult(intentMonth,5);
                 break;
             case android.R.id.home:
                 Intent data = new Intent();
@@ -82,4 +85,23 @@ public class More extends AppCompatActivity implements View.OnClickListener{
         setResult(Activity.RESULT_CANCELED, data);
         super.onBackPressed();
     }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // action with ID action_goto_add_customer was selected
+            case R.id.action_showMore:
+                startActivityForResult(new Intent(More.this, More.class), 4);
+                break;
+            case android.R.id.home:
+                Intent data = new Intent();
+                // add data to Intent
+                setResult(Activity.RESULT_CANCELED, data);
+                Toast.makeText(getApplicationContext(),"Back button clicked", Toast.LENGTH_SHORT).show();
+                finish();
+                //Don't apply break statement. It will stop the home action.
+            default:
+                break;
+        }
+        return true;
+    }//End of onOptionsItemSelected(...)
+
 }

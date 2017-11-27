@@ -152,7 +152,6 @@ public class  ViewPage extends AppCompatActivity {
             case "LIKE" : // if its button1
                 int[] k = database.selectLikes(userz);
                 cursor = database.selectCustomers(k);
-                int kk=k.length;
                 cursor.moveToFirst();
 
                 while (!cursor.isAfterLast()) {
@@ -187,6 +186,7 @@ public class  ViewPage extends AppCompatActivity {
                     m_customerArrayList.add(oneCustomer);
                     cursor.moveToNext();
                 }
+                cursor.close();
                 database.close();
                 break;
             case "SEARCH" : // if its button1
@@ -209,10 +209,10 @@ public class  ViewPage extends AppCompatActivity {
                 cursor.close();
                 database.close();
                 break;
-                /*
-            case "trend":
-                int[] allUsers = database.selectLikes(userz);
-                cursor = database.selectCustomers(allUsers);
+
+            case "MONTH":
+                String monthData =getIntent().getStringExtra("MONTH");
+                cursor = database.month(monthData);
 
                 cursor.moveToFirst();
                 while (!cursor.isAfterLast()) {
@@ -229,9 +229,8 @@ public class  ViewPage extends AppCompatActivity {
                     cursor.moveToNext();
                 }
                 cursor.close();
-                database.close();
+                database.open();
                 break;
-                */
         }
     }
 }

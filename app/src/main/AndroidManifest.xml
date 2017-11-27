@@ -91,6 +91,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="mapp.noted.MainActivity" />
         </activity>
+        <activity android:name="mapp.noted.MonthPage"
+            android:parentActivityName="mapp.noted.MainActivity">
+            <!-- The meta-data element is needed for versions lower than 4.1 -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="mapp.noted.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
