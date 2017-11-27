@@ -16,20 +16,21 @@
             android:hint="Name"
             android:textSize="10pt">
         </EditText>
-        <EditText
-            android:id="@+id/EditText_note"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Note Text"
-            android:textSize="10pt">
-        </EditText>
 
         <EditText
             android:id="@+id/EditText_Desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Description"
-            android:textSize="10pt">
+            android:textSize="10pt"></EditText>
+
+        <EditText
+            android:id="@+id/EditText_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Notes"
+            android:textSize="10pt"
+            android:inputType="textMultiLine">
         </EditText>
 
         <TextView
@@ -52,6 +53,7 @@
             android:layout_height="wrap_content"
             android:text="Public" />
         </RadioGroup>
+
         <Button
             android:id="@+id/Button_Save"
             android:layout_height="wrap_content"

@@ -7,9 +7,9 @@
         android:id="@+id/TextView_Name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:paddingTop="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="15dp"
         android:text="Name"
         android:textColor="#3D86CF"
         android:textSize="30sp"/>
@@ -18,8 +18,8 @@
         android:id="@+id/TextView_desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:text="Description"
         android:textColor="#000000"
         android:textSize="20sp" />
@@ -28,8 +28,8 @@
         android:id="@+id/TextView_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:text="Date"
         android:textSize="15sp"/>
 
@@ -37,8 +37,8 @@
         android:id="@+id/TextView_creator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:text="Creator"
         android:textSize="15sp"/>
 
@@ -72,6 +72,11 @@
             android:drawableRight="@android:drawable/ic_menu_view"
             android:paddingRight="5dp" />
     </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="#c9c9c9"/>
 
 
 </LinearLayout>

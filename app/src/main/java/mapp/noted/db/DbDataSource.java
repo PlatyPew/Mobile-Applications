@@ -115,7 +115,7 @@ public class DbDataSource {
     }
 
     public Cursor search(String k){
-        Cursor cursor = m_database.rawQuery("SELECT FROM " + DbHelper.TABLE +
+        Cursor cursor = m_database.rawQuery("SELECT * FROM " + DbHelper.TABLE +
                 " WHERE ("+ DbHelper.COLUMN_ID+" LIKE \'%"+k+"%\' OR "+ DbHelper.COLUMN_NAME+" LIKE \'%"+k+"%\' OR "
                 + DbHelper.COLUMN_NOTES+" LIKE \'%"+k+"%\' OR "+ DbHelper.COLUMN_DESC+" LIKE \'%"+k+"%\' OR "
                 + DbHelper.COLUMN_CREATOR+" LIKE \'%"+k+"%\' OR "+ DbHelper.COLUMN_DATE+" LIKE \'%"+k+"%\' )AND "
