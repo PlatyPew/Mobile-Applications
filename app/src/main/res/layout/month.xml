@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="right">
+
+        <Button
+            android:id="@+id/jan"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_gravity="left"
+            android:text="January"
+            android:paddingRight="5dp"/>
+        <Button
+            android:id="@+id/feb"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_gravity="left"
+            android:text="Febuary"
+            android:paddingRight="5dp"/>
+        <Button
+            android:id="@+id/mar"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_gravity="left"
+            android:text="March"
+            android:paddingRight="5dp"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="right">
+
+        <Button
+            android:id="@+id/apr"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_gravity="left"
+            android:text="April"
+            android:paddingRight="5dp"/>
+        <Button
+            android:id="@+id/may"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_gravity="left"
+            android:text="May"
+            android:paddingRight="5dp"/>
+        <Button
+            android:id="@+id/jun"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_gravity="left"
+            android:text="June"
+            android:paddingRight="5dp"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="right">
+
+        <Button
+            android:id="@+id/jul"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_gravity="left"
+            android:text="July"
+            android:paddingRight="5dp"/>
+        <Button
+            android:id="@+id/aug"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_gravity="left"
+            android:text="August"
+            android:paddingRight="5dp"/>
+        <Button
+            android:id="@+id/sep"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_gravity="left"
+            android:text="September"
+            android:paddingRight="5dp"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="right">
+
+        <Button
+            android:id="@+id/oct"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_gravity="left"
+            android:text="October"
+            android:paddingRight="5dp"/>
+        <Button
+            android:id="@+id/nov"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_gravity="left"
+            android:text="November"
+            android:paddingRight="5dp"/>
+        <Button
+            android:id="@+id/dec"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_gravity="left"
+            android:text="December"
+            android:paddingRight="5dp"/>
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

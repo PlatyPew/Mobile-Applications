@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_goto_add_customer"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:title="Add"/>
+    <item
+        android:id="@+id/action_logout"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:title="Log-Out"/>
+    <item
+        android:id="@+id/action_viewall"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:title="view all"/>
+</menu>
