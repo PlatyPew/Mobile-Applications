@@ -109,12 +109,12 @@ public class DbDataSource {
         Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE3+" where "+ DbHelper.COLUMN_ID1+" IS \'"+I+"\'", null);
         return cursor;
     }
-    public Cursor search(String k){
-        Cursor cursor = m_database.rawQuery("SELECT * FROM " + DbHelper.TABLE+" WHERE ("+ DbHelper.COLUMN_DATE+" LIKE \'%"+k+"%\' ",null);
+    public Cursor month(String k){
+        Cursor cursor = m_database.rawQuery("SELECT * FROM " + DbHelper.TABLE+" WHERE ("+ DbHelper.COLUMN_DATE+" LIKE \'%"+k+"%\' )",null);
         return cursor;
     }
 
-    public Cursor month(String k){
+    public Cursor search(String k){
         Cursor cursor = m_database.rawQuery("SELECT FROM " + DbHelper.TABLE +
                 " WHERE ("+ DbHelper.COLUMN_ID+" LIKE \'%"+k+"%\' OR "+ DbHelper.COLUMN_NAME+" LIKE \'%"+k+"%\' OR "
                 + DbHelper.COLUMN_NOTES+" LIKE \'%"+k+"%\' OR "+ DbHelper.COLUMN_DESC+" LIKE \'%"+k+"%\' OR "
