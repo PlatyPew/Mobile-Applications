@@ -100,7 +100,7 @@ public class MainPage extends AppCompatActivity {
 
             }
         };
-        m_noteArrayAdapter = new NoteArrayAdapter(R.layout.customer_list_item, m_noteArrayList,listener);
+        m_noteArrayAdapter = new NoteArrayAdapter(R.layout.note_list_item, m_noteArrayList,listener);
         m_recyclerView = (RecyclerView) findViewById(R.id.RecyclerView_CustomerList);
         m_recyclerView.setLayoutManager(new LinearLayoutManager(this));
         m_recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -113,15 +113,42 @@ public class MainPage extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         //Reference: http://www.vogella.com/tutorials/AndroidActionBar/article.html
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
+        inflater.inflate(R.menu.menu_main, menu);
         return true;
-    }//End of onCreateOptionsMenu
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_showMore:
-                startActivityForResult(new Intent(MainPage.this, More.class), 4);
+            case R.id.add:
+                startActivityForResult(new Intent(MainPage.this, AddNotes.class), 4);
+                break;
+            case R.id.logout:
+                startActivityForResult(new Intent(MainPage.this, MainActivity.class), 4);
+                break;
+            case R.id.all:
+                Intent intent=new Intent(MainPage.this, ViewPage.class);
+                intent.putExtra("VIEW", "ALL");
+                startActivityForResult(intent,5);
+                break;
+            case R.id.search:
+                startActivityForResult(new Intent(MainPage.this, Search.class), 4);
+                break;
+            case R.id.recent:
+                startActivityForResult(new Intent(MainPage.this, RecentPage.class), 4);
+                break;
+            case R.id.about:
+                startActivityForResult(new Intent(MainPage.this, About.class),4);
+                break;
+            case R.id.likes:
+                Intent intentS = new Intent(MainPage.this, ViewPage.class);
+                intentS.putExtra("VIEW", "LIKE");
+                startActivityForResult(intentS,5);
+                break;
+            case R.id.month:
+                Intent intentMonth = new Intent(MainPage.this, MonthPage.class);
+                intentMonth.putExtra("VIEW", "MONTH");
+                startActivityForResult(intentMonth,5);
                 break;
             case android.R.id.home:
                 Intent data = new Intent();

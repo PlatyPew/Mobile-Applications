@@ -77,8 +77,7 @@ public class RecentArrayAdapter extends RecyclerView.Adapter<RecentArrayAdapter.
 
             //Get the three variables, textView_name, textView_mobileContact and
             //button_edit to reference the elements which are defined the the XML in
-            //the customer_list_item.xml.
-            textView_text= (TextView) itemView.findViewById(R.id.TextView_text);
+            //the note_list_item.xml          textView_text= (TextView) itemView.findViewById(R.id.TextView_text);
             textView_date = (TextView) itemView.findViewById(R.id.TextView_date);
 
         }

@@ -79,7 +79,7 @@ public class NoteArrayAdapter extends RecyclerView.Adapter<NoteArrayAdapter.View
 
             //Get the three variables, textView_name, textView_mobileContact and
             //button_edit to reference the elements which are defined the the XML in
-            //the customer_list_item.xml.
+            //the note_list_item.
             textView_name = (TextView) itemView.findViewById(R.id.TextView_Name);
             textView_desc = (TextView) itemView.findViewById(R.id.TextView_desc);
             textView_date = (TextView) itemView.findViewById(R.id.TextView_date);

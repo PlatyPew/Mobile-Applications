@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -78,6 +80,14 @@ public class AddNotes extends AppCompatActivity {
     }//End of onCreate
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //Reference: http://www.vogella.com/tutorials/AndroidActionBar/article.html
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
     public void onBackPressed() {
         Intent data = new Intent();
         // add data to Intent
@@ -86,6 +96,36 @@ public class AddNotes extends AppCompatActivity {
     }
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.add:
+                startActivityForResult(new Intent(AddNotes.this, AddNotes.class), 4);
+                break;
+            case R.id.logout:
+                startActivityForResult(new Intent(AddNotes.this, MainActivity.class), 4);
+                break;
+            case R.id.all:
+                Intent intent=new Intent(AddNotes.this, ViewPage.class);
+                intent.putExtra("VIEW", "ALL");
+                startActivityForResult(intent,5);
+                break;
+            case R.id.search:
+                startActivityForResult(new Intent(AddNotes.this, Search.class), 4);
+                break;
+            case R.id.recent:
+                startActivityForResult(new Intent(AddNotes.this, RecentPage.class), 4);
+                break;
+            case R.id.about:
+                startActivityForResult(new Intent(AddNotes.this, About.class),4);
+                break;
+            case R.id.likes:
+                Intent intentS = new Intent(AddNotes.this, ViewPage.class);
+                intentS.putExtra("VIEW", "LIKE");
+                startActivityForResult(intentS,5);
+                break;
+            case R.id.month:
+                Intent intentMonth = new Intent(AddNotes.this, MonthPage.class);
+                intentMonth.putExtra("VIEW", "MONTH");
+                startActivityForResult(intentMonth,5);
+                break;
             case android.R.id.home:
                 Intent data = new Intent();
                 // add data to Intent
