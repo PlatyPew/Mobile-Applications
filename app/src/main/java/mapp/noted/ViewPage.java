@@ -111,16 +111,42 @@ public class  ViewPage extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         //Reference: http://www.vogella.com/tutorials/AndroidActionBar/article.html
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
+        inflater.inflate(R.menu.menu_main, menu);
         return true;
-    }//End of onCreateOptionsMenu
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            // action with ID action_goto_add_customer was selected
-            case R.id.action_showMore:
-                startActivityForResult(new Intent(ViewPage.this, More.class), 4);
+            case R.id.add:
+                startActivityForResult(new Intent(this, AddNotes.class), 4);
+                break;
+            case R.id.logout:
+                startActivityForResult(new Intent(this, MainActivity.class), 4);
+                break;
+            case R.id.all:
+                Intent intent=new Intent(this, ViewPage.class);
+                intent.putExtra("VIEW", "ALL");
+                startActivityForResult(intent,5);
+                break;
+            case R.id.search:
+                startActivityForResult(new Intent(this, Search.class), 4);
+                break;
+            case R.id.recent:
+                startActivityForResult(new Intent(this, RecentPage.class), 4);
+                break;
+            case R.id.about:
+                startActivityForResult(new Intent(this, About.class),4);
+                break;
+            case R.id.likes:
+                Intent intentS = new Intent(this, ViewPage.class);
+                intentS.putExtra("VIEW", "LIKE");
+                startActivityForResult(intentS,5);
+                break;
+            case R.id.month:
+                Intent intentMonth = new Intent(this, MonthPage.class);
+                intentMonth.putExtra("VIEW", "MONTH");
+                startActivityForResult(intentMonth,5);
                 break;
             case android.R.id.home:
                 Intent data = new Intent();
@@ -236,4 +262,5 @@ public class  ViewPage extends AppCompatActivity {
                 break;
         }
     }
+
 }

@@ -79,6 +79,7 @@ public class RecentArrayAdapter extends RecyclerView.Adapter<RecentArrayAdapter.
             //button_edit to reference the elements which are defined the the XML in
             //the note_list_item.xml          textView_text= (TextView) itemView.findViewById(R.id.TextView_text);
             textView_date = (TextView) itemView.findViewById(R.id.TextView_date);
+            textView_text = (TextView) itemView.findViewById(R.id.TextView_text);
 
         }
         @Override

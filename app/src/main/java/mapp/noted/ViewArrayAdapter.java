@@ -52,15 +52,14 @@ public class ViewArrayAdapter extends RecyclerView.Adapter<ViewArrayAdapter.View
         //This is where we place code so that the Android system can run them
         //to display the customer data inside each recyclerview rows.
         TextView textView_name = holder.textView_name;
-        //TextView textView_mobileContact = holder.textView_mobileContact;
         TextView textView_desc = holder.textView_desc;
         TextView textView_date = holder.textView_date;
         TextView textView_creat = holder.textView_creat;
         TextView textView_likes = holder.textView_likes;
 
+        textView_name.setText(noteArrayList.get(listPosition).getName());
         textView_desc.setText(noteArrayList.get(listPosition).getDesc());
         textView_date.setText(noteArrayList.get(listPosition).getDate());
-        textView_name.setText(noteArrayList.get(listPosition).getName());
 
         String likes = Integer.toString(noteArrayList.get(listPosition).getLikes());
         if (likes.equals("1")) {
@@ -98,6 +97,7 @@ public class ViewArrayAdapter extends RecyclerView.Adapter<ViewArrayAdapter.View
             textView_date = (TextView) itemView.findViewById(R.id.TextView_date);
             textView_creat = (TextView) itemView.findViewById(R.id.TextView_creator);
             textView_likes = (TextView) itemView.findViewById(R.id.TextView_likes);
+            textView_name = (TextView) itemView.findViewById(R.id.TextView_Name);
 
             button_view = (Button) itemView.findViewById(R.id.Button_view);
             button_star = (Button) itemView.findViewById(R.id.Button_Star);

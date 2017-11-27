@@ -72,7 +72,7 @@ public class DbDataSource {
     public void insertLog(String from, String to, String note,String action, String time,int id) {
 
         if (likes(id,from)>0 && action.equals("liked")){
-            m_database.execSQL("DELETE FROM " + DbHelper.TABLE2 + " WHERE " + DbHelper.COLUMN_ID+"="+String.valueOf(id)+" and "+DbHelper.COLUMN_ACTION+"=\'"+action+"\' ");
+            m_database.execSQL("DELETE FROM " + DbHelper.TABLE2 + " WHERE " + DbHelper.COLUMN_ID+"="+String.valueOf(id)+" and "+DbHelper.COLUMN_ACTION+"=\'"+action+"\' and "+DbHelper.COLUMN_FROM+"=\'"+from+"\' ");
             //int success = m_database.delete(DbHelper.TABLE2,,new String[]{from,to,note,action});
         }else {
             m_database.beginTransaction();
@@ -107,7 +107,7 @@ public class DbDataSource {
     }
 
     public Cursor month(String k){
-        Cursor cursor = m_database.rawQuery("SELECT * FROM " + DbHelper.TABLE+" WHERE ("+ DbHelper.COLUMN_DATE+" LIKE \'%"+k+"%\' )",null);
+        Cursor cursor = m_database.rawQuery("SELECT * FROM " + DbHelper.TABLE+" WHERE ("+ DbHelper.COLUMN_DATE+" LIKE \'%"+k+"%\' AND "+ DbHelper.COLUMN_PERM+" IS \'pu\')",null);
         return cursor;
     }
 
