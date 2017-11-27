@@ -89,8 +89,8 @@ public class RecentPage extends AppCompatActivity {
 
     protected void loadData(String n){
         Log oneCustomer;
-        //Note: the m_customerArrayList is declared as class member variable
-        //Clear the m_customerArrayList first before opening the database
+        //Note: the m_noteArrayList is declared as class member variable
+        //Clear the m_noteArrayList first before opening the database
         m_customerArrayList.clear();
         DbDataSource database = new DbDataSource(this);
         database.open();

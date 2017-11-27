@@ -17,12 +17,12 @@ import java.util.Date;
 
 import mapp.noted.db.DbDataSource;
 
-public class AddCustomer extends AppCompatActivity {
+public class AddNotes extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_customer);
+        setContentView(R.layout.activity_add_note);
 
 
         findViewById(R.id.Button_Save).setOnClickListener( new View.OnClickListener() {
@@ -64,9 +64,9 @@ public class AddCustomer extends AppCompatActivity {
                 }
 
                 DbDataSource db = new DbDataSource(v.getContext());
-                Customer newCustomer = new Customer(0,name,note,date,desc,user,perm);
+                Note newNote = new Note(0,name,note,date,desc,user,perm);
                 db.open();
-                db.insertCustomer(newCustomer);
+                db.insertCustomer(newNote);
                 String dateee = dateFormat.format(datee);
                 db.insertLog(user,user,name,"created",dateee,0);
                 Toast.makeText(v.getContext(), "Saved one note", Toast.LENGTH_SHORT).show();

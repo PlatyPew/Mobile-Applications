@@ -25,9 +25,9 @@ import java.util.Date;
 import mapp.noted.db.DbDataSource;
 
 public class MainPage extends AppCompatActivity {
-    public static ArrayList<Customer> m_customerArrayList;
+    public static ArrayList<Note> m_noteArrayList;
     RecyclerView m_recyclerView;
-    public static CustomerArrayAdapter m_customerArrayAdapter;
+    public static NoteArrayAdapter m_noteArrayAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,19 +37,19 @@ public class MainPage extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(false);
 
         // Initializing list view with the custom adapter
-        m_customerArrayList = new ArrayList<Customer>();
+        m_noteArrayList = new ArrayList<Note>();
         RecyclerViewClickListener listener = new RecyclerViewClickListener() {
             @Override
             public void onClick(View view, int position) {
                 //Toast.makeText(view.getContext(), "You have selected position " + position, Toast.LENGTH_SHORT).show();
-                Customer selectedCustomerToUpdate = m_customerArrayList.get(position);
-                int id = selectedCustomerToUpdate.getId();
-                String name = selectedCustomerToUpdate.getName();
-                String contact = selectedCustomerToUpdate.getNote();
-                String desc = selectedCustomerToUpdate.getDesc();
-                String date = selectedCustomerToUpdate.getDate();
-                String perm=selectedCustomerToUpdate.getPerm();
-                String users=selectedCustomerToUpdate.getUser();
+                Note selectedNoteToUpdate = m_noteArrayList.get(position);
+                int id = selectedNoteToUpdate.getId();
+                String name = selectedNoteToUpdate.getName();
+                String contact = selectedNoteToUpdate.getNote();
+                String desc = selectedNoteToUpdate.getDesc();
+                String date = selectedNoteToUpdate.getDate();
+                String perm= selectedNoteToUpdate.getPerm();
+                String users= selectedNoteToUpdate.getUser();
 
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
                 String user= pref.getString("name","name");
@@ -66,7 +66,7 @@ public class MainPage extends AppCompatActivity {
                         db.insertLog(user,users,name,"viewed",dateee,id);
                         //(String from, String to, String note,String action, String time)
                         db.close();
-                        intent = new Intent(MainPage.this,ViewCustomer.class);
+                        intent = new Intent(MainPage.this,ViewNote.class);
                         intent.putExtra("ID", Integer.toString(id));
                         intent.putExtra("NAME", name);
                         intent.putExtra("NOTE", contact);
@@ -77,7 +77,7 @@ public class MainPage extends AppCompatActivity {
                         startActivityForResult(intent,5);
                         break;
                     case R.id.Button_Edit : // if its button1
-                        intent = new Intent(MainPage.this,UpdateCustomer.class);
+                        intent = new Intent(MainPage.this,UpdateNote.class);
                         intent.putExtra("ID", Integer.toString(id));
                         intent.putExtra("NAME", name);
                         intent.putExtra("NOTE", contact);
@@ -100,11 +100,11 @@ public class MainPage extends AppCompatActivity {
 
             }
         };
-        m_customerArrayAdapter = new CustomerArrayAdapter(R.layout.customer_list_item, m_customerArrayList,listener);
+        m_noteArrayAdapter = new NoteArrayAdapter(R.layout.customer_list_item, m_noteArrayList,listener);
         m_recyclerView = (RecyclerView) findViewById(R.id.RecyclerView_CustomerList);
         m_recyclerView.setLayoutManager(new LinearLayoutManager(this));
         m_recyclerView.setItemAnimator(new DefaultItemAnimator());
-        m_recyclerView.setAdapter(m_customerArrayAdapter);
+        m_recyclerView.setAdapter(m_noteArrayAdapter);
 
         loadData();
     }
@@ -137,10 +137,10 @@ public class MainPage extends AppCompatActivity {
     }//End of onOptionsItemSelected(...)
 
     protected void loadData(){
-        Customer oneCustomer;
-        //Note: the m_customerArrayList is declared as class member variable
-        //Clear the m_customerArrayList first before opening the database
-        m_customerArrayList.clear();
+        Note oneNote;
+        //Note: the m_noteArrayList is declared as class member variable
+        //Clear the m_noteArrayList first before opening the database
+        m_noteArrayList.clear();
         DbDataSource database = new DbDataSource(this);
         database.open();
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
@@ -161,8 +161,8 @@ public class MainPage extends AppCompatActivity {
             String date = cursor.getString(cursor.getColumnIndex("DATE"));
             String user = cursor.getString(cursor.getColumnIndex("USER"));
             String perm = cursor.getString(cursor.getColumnIndex("PERM"));
-            oneCustomer = new Customer(id,name,note,date,desc,user,perm);
-            m_customerArrayList.add(oneCustomer);
+            oneNote = new Note(id,name,note,date,desc,user,perm);
+            m_noteArrayList.add(oneNote);
             cursor.moveToNext();
         }
         database.close();
@@ -179,13 +179,13 @@ public class MainPage extends AppCompatActivity {
         if (requestCode == 4) {
             Log.v("MainActivity","Executed onActivityResult 4");
             loadData();//Update the recylcerview to reflect the changes
-            m_customerArrayAdapter.notifyDataSetChanged();
+            m_noteArrayAdapter.notifyDataSetChanged();
         }
         if ((requestCode == 5)&&(resultCode == Activity.RESULT_CANCELED)) {
             //Log.v("MainActivity","You visited the Edit screen and clicked Home");
             //Toast.makeText(getBaseContext(), "You visited the Edit screen and clicked Home or Back", Toast.LENGTH_SHORT).show();
             loadData();//Update the recylcerview to reflect the changes
-            m_customerArrayAdapter.notifyDataSetChanged();
+            m_noteArrayAdapter.notifyDataSetChanged();
         }
     }
 }

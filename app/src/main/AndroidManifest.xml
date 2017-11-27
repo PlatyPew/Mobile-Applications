@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="mapp.noted.AddCustomer"
+            android:name="mapp.noted.AddNotes"
             android:parentActivityName="mapp.noted.MainActivity">
 
             <!-- The meta-data element is needed for versions lower than 4.1 -->
@@ -35,14 +35,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="mapp.noted.MainActivity" />
         </activity>
-        <activity android:name="mapp.noted.UpdateCustomer"
+        <activity android:name="mapp.noted.UpdateNote"
             android:parentActivityName="mapp.noted.MainActivity">
             <!-- The meta-data element is needed for versions lower than 4.1 -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="mapp.noted.MainActivity" />
         </activity>
-        <activity android:name="mapp.noted.ViewCustomer"
+        <activity android:name="mapp.noted.ViewNote"
             android:parentActivityName="mapp.noted.MainActivity">
             <!-- The meta-data element is needed for versions lower than 4.1 -->
             <meta-data

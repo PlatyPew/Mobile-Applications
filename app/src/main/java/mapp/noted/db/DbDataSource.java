@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import mapp.noted.Customer;
+import mapp.noted.Note;
 
 public class DbDataSource {
     //Create a variable, m_database capable of referencing the SQLiteDatabase
@@ -35,16 +35,16 @@ public class DbDataSource {
 
 
     //insert
-    public void insertCustomer(Customer customer) {
+    public void insertCustomer(Note note) {
         m_database.beginTransaction();
         try{
             ContentValues values = new ContentValues();
-            values.put(DbHelper.COLUMN_NAME, customer.getName());
-            values.put(DbHelper.COLUMN_NOTES, customer.getNote());
-            values.put(DbHelper.COLUMN_DESC, customer.getDesc());
-            values.put(DbHelper.COLUMN_DATE, customer.getDate());
-            values.put(DbHelper.COLUMN_CREATOR, customer.getUser());
-            values.put(DbHelper.COLUMN_PERM, customer.getPerm());
+            values.put(DbHelper.COLUMN_NAME, note.getName());
+            values.put(DbHelper.COLUMN_NOTES, note.getNote());
+            values.put(DbHelper.COLUMN_DESC, note.getDesc());
+            values.put(DbHelper.COLUMN_DATE, note.getDate());
+            values.put(DbHelper.COLUMN_CREATOR, note.getUser());
+            values.put(DbHelper.COLUMN_PERM, note.getPerm());
 
             m_database.insert(DbHelper.TABLE, null, values);
 

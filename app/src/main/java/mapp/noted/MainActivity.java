@@ -19,9 +19,9 @@ import java.util.ArrayList;
 import mapp.noted.db.DbDataSource;
 
 public class MainActivity extends AppCompatActivity {
-    public static ArrayList<Customer> m_customerArrayList;
+    public static ArrayList<Note> m_noteArrayList;
     RecyclerView m_recyclerView;
-    public static CustomerArrayAdapter m_customerArrayAdapter;
+    public static NoteArrayAdapter m_noteArrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -21,11 +21,11 @@ public class ViewArrayAdapter extends RecyclerView.Adapter<ViewArrayAdapter.View
 
     //All methods in this adapter are required for a bare minimum recyclerview adapter
     private int listItemLayout;
-    private ArrayList<Customer> customerArrayList;
+    private ArrayList<Note> noteArrayList;
     // Constructor of the class
-    public ViewArrayAdapter(int layoutId, ArrayList<Customer> itemList, RecyclerViewClickListener listener) {
+    public ViewArrayAdapter(int layoutId, ArrayList<Note> itemList, RecyclerViewClickListener listener) {
         listItemLayout = layoutId;
-        this.customerArrayList = itemList;
+        this.noteArrayList = itemList;
         this.mListener = listener;
     }
 
@@ -34,7 +34,7 @@ public class ViewArrayAdapter extends RecyclerView.Adapter<ViewArrayAdapter.View
     // get the size of the list
     @Override
     public int getItemCount() {
-        return customerArrayList == null ? 0 : customerArrayList.size();
+        return noteArrayList == null ? 0 : noteArrayList.size();
     }
 
 
@@ -58,19 +58,19 @@ public class ViewArrayAdapter extends RecyclerView.Adapter<ViewArrayAdapter.View
         TextView textView_creat = holder.textView_creat;
         TextView textView_likes = holder.textView_likes;
 
-        textView_desc.setText(customerArrayList.get(listPosition).getDesc());
-        textView_date.setText(customerArrayList.get(listPosition).getDate());
-        textView_name.setText(customerArrayList.get(listPosition).getName());
+        textView_desc.setText(noteArrayList.get(listPosition).getDesc());
+        textView_date.setText(noteArrayList.get(listPosition).getDate());
+        textView_name.setText(noteArrayList.get(listPosition).getName());
 
-        String likes = Integer.toString(customerArrayList.get(listPosition).getLikes());
+        String likes = Integer.toString(noteArrayList.get(listPosition).getLikes());
         if (likes.equals("1")) {
             textView_likes.setText(likes +" like");
         } else {
             textView_likes.setText(likes +" likes");
         }
 
-        textView_creat.setText("Creator : "+customerArrayList.get(listPosition).getUser());
-        //textView_mobileContact.setText(customerArrayList.get(listPosition).getNote());
+        textView_creat.setText("Creator : "+ noteArrayList.get(listPosition).getUser());
+        //textView_mobileContact.setText(noteArrayList.get(listPosition).getNote());
     }
 
     // Static inner class to initialize the views of rows

@@ -4,7 +4,7 @@ package mapp.noted;
  * Created by User on 11/10/2017.
  */
 
-public class Customer {
+public class Note {
 
     private int id;
     private String desc;
@@ -17,10 +17,10 @@ public class Customer {
     //private String img;
 
     //I have provided a constructor so that it is easier to provide
-    //code such as new Customer(0,'RICHARD LOW','90883377');
-    //The command can create a Customer type object and at the same time fill the object's
+    //code such as new Note(0,'RICHARD LOW','90883377');
+    //The command can create a Note type object and at the same time fill the object's
     //properties to describe one customer information.
-    public Customer(int inId, String inName, String notes, String date, String desc, String user,String perm){//, String img){
+    public Note(int inId, String inName, String notes, String date, String desc, String user, String perm){//, String img){
         this.name=inName;
         this.id = inId;
         this.notes = notes;
@@ -84,6 +84,6 @@ public class Customer {
     public void setPerm(String inMobileContact) {this.perm = inMobileContact;}
 
 
-}//End of Customer class
+}//End of Note class
 
 

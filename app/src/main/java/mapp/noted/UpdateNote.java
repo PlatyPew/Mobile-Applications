@@ -18,7 +18,7 @@ import java.util.Date;
 
 import mapp.noted.db.DbDataSource;
 
-public class UpdateCustomer extends AppCompatActivity {
+public class UpdateNote extends AppCompatActivity {
     private int id;
     private String name;
     private String note;
@@ -31,7 +31,7 @@ public class UpdateCustomer extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_customer);
+        setContentView(R.layout.activity_update_note);
 
 
 

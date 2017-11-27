@@ -11,18 +11,18 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 
-public class CustomerArrayAdapter extends RecyclerView.Adapter<CustomerArrayAdapter.ViewHolder> {
+public class NoteArrayAdapter extends RecyclerView.Adapter<NoteArrayAdapter.ViewHolder> {
 
 
     private RecyclerViewClickListener mListener;
 
     //All methods in this adapter are required for a bare minimum recyclerview adapter
     private int listItemLayout;
-    private ArrayList<Customer> customerArrayList;
+    private ArrayList<Note> noteArrayList;
     // Constructor of the class
-    public CustomerArrayAdapter(int layoutId, ArrayList<Customer> itemList, RecyclerViewClickListener listener) {
+    public NoteArrayAdapter(int layoutId, ArrayList<Note> itemList, RecyclerViewClickListener listener) {
         listItemLayout = layoutId;
-        this.customerArrayList = itemList;
+        this.noteArrayList = itemList;
         this.mListener = listener;
     }
 
@@ -31,7 +31,7 @@ public class CustomerArrayAdapter extends RecyclerView.Adapter<CustomerArrayAdap
     // get the size of the list
     @Override
     public int getItemCount() {
-        return customerArrayList == null ? 0 : customerArrayList.size();
+        return noteArrayList == null ? 0 : noteArrayList.size();
     }
 
 
@@ -53,11 +53,11 @@ public class CustomerArrayAdapter extends RecyclerView.Adapter<CustomerArrayAdap
         TextView textView_desc = holder.textView_desc;
         TextView textView_date = holder.textView_date;
         TextView textView_creat = holder.textView_creat;
-        textView_desc.setText(customerArrayList.get(listPosition).getDesc());
-        textView_date.setText(customerArrayList.get(listPosition).getDate());
-        textView_name.setText(customerArrayList.get(listPosition).getName());
-        textView_creat.setText("Author : "+customerArrayList.get(listPosition).getUser());
-        //textView_mobileContact.setText(customerArrayList.get(listPosition).getNote());
+        textView_desc.setText(noteArrayList.get(listPosition).getDesc());
+        textView_date.setText(noteArrayList.get(listPosition).getDate());
+        textView_name.setText(noteArrayList.get(listPosition).getName());
+        textView_creat.setText("Author : "+ noteArrayList.get(listPosition).getUser());
+        //textView_mobileContact.setText(noteArrayList.get(listPosition).getNote());
     }
 
     // Static inner class to initialize the views of rows

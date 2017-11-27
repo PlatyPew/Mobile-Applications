@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ViewCustomer extends AppCompatActivity {
+public class ViewNote extends AppCompatActivity {
     private int id;
     private String name;
     private String note;
@@ -21,7 +21,7 @@ public class ViewCustomer extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.view_customer);
+        setContentView(R.layout.view_note);
 
 
 

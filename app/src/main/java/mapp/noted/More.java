@@ -39,7 +39,7 @@ public class More extends AppCompatActivity implements View.OnClickListener{
     public void onClick(View view) {
         switch(view.getId()) {
             case R.id.add:
-                startActivityForResult(new Intent(More.this, AddCustomer.class), 4);
+                startActivityForResult(new Intent(More.this, AddNotes.class), 4);
                 break;
             case R.id.logout:
                 startActivityForResult(new Intent(More.this, MainActivity.class), 4);
@@ -87,10 +87,6 @@ public class More extends AppCompatActivity implements View.OnClickListener{
     }
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            // action with ID action_goto_add_customer was selected
-            case R.id.action_showMore:
-                startActivityForResult(new Intent(More.this, More.class), 4);
-                break;
             case android.R.id.home:
                 Intent data = new Intent();
                 // add data to Intent

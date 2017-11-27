@@ -23,7 +23,7 @@ import java.util.Date;
 import mapp.noted.db.DbDataSource;
 
 public class  ViewPage extends AppCompatActivity {
-    public static ArrayList<Customer> m_customerArrayList;
+    public static ArrayList<Note> m_noteArrayList;
     RecyclerView m_recyclerView;
     public static ViewArrayAdapter m_customerArrayAdapter;
     @Override
@@ -32,19 +32,19 @@ public class  ViewPage extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Initializing list view with the custom adapter
-        m_customerArrayList = new ArrayList<Customer>();
+        m_noteArrayList = new ArrayList<Note>();
         RecyclerViewClickListener listener = new RecyclerViewClickListener() {
             @Override
             public void onClick(View view, int position) {
                 //Toast.makeText(view.getContext(), "You have selected position " + position, Toast.LENGTH_SHORT).show();
-                Customer selectedCustomerToUpdate = m_customerArrayList.get(position);
-                int id = selectedCustomerToUpdate.getId();
-                String name = selectedCustomerToUpdate.getName();
-                String contact = selectedCustomerToUpdate.getNote();
-                String desc = selectedCustomerToUpdate.getDesc();
-                String date = selectedCustomerToUpdate.getDate();
-                String perm = selectedCustomerToUpdate.getPerm();
-                String users = selectedCustomerToUpdate.getUser();
+                Note selectedNoteToUpdate = m_noteArrayList.get(position);
+                int id = selectedNoteToUpdate.getId();
+                String name = selectedNoteToUpdate.getName();
+                String contact = selectedNoteToUpdate.getNote();
+                String desc = selectedNoteToUpdate.getDesc();
+                String date = selectedNoteToUpdate.getDate();
+                String perm = selectedNoteToUpdate.getPerm();
+                String users = selectedNoteToUpdate.getUser();
 
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
                 String user= pref.getString("name","name");
@@ -57,7 +57,7 @@ public class  ViewPage extends AppCompatActivity {
                 {
                     case R.id.Button_view : // if its button1
 
-                        intent = new Intent(ViewPage.this,ViewCustomer.class);
+                        intent = new Intent(ViewPage.this,ViewNote.class);
 
                         intent.putExtra("ID", Integer.toString(id));
                         intent.putExtra("NAME", name);
@@ -90,7 +90,7 @@ public class  ViewPage extends AppCompatActivity {
                 }
             }
         };
-        m_customerArrayAdapter = new ViewArrayAdapter(R.layout.view_list_item, m_customerArrayList,listener);
+        m_customerArrayAdapter = new ViewArrayAdapter(R.layout.view_list_item, m_noteArrayList,listener);
         m_recyclerView = (RecyclerView) findViewById(R.id.RecyclerView_CustomerList);
         m_recyclerView.setLayoutManager(new LinearLayoutManager(this));
         m_recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -136,10 +136,10 @@ public class  ViewPage extends AppCompatActivity {
     }//End of onOptionsItemSelected(...)
 
     protected void loadData(String n){
-        Customer oneCustomer;
-        //Note: the m_customerArrayList is declared as class member variable
-        //Clear the m_customerArrayList first before opening the database
-        m_customerArrayList.clear();
+        Note oneNote;
+        //Note: the m_noteArrayList is declared as class member variable
+        //Clear the m_noteArrayList first before opening the database
+        m_noteArrayList.clear();
         DbDataSource database = new DbDataSource(this);
         database.open();
         //The following command will retrieve all data from the database
@@ -162,9 +162,9 @@ public class  ViewPage extends AppCompatActivity {
                     String date = cursor.getString(cursor.getColumnIndex("DATE"));
                     String user = cursor.getString(cursor.getColumnIndex("USER"));
                     String perm = cursor.getString(cursor.getColumnIndex("PERM"));
-                    oneCustomer = new Customer(id,name,note,date,desc,user,perm);
-                    oneCustomer.setLikes(database.likes(name));
-                    m_customerArrayList.add(oneCustomer);
+                    oneNote = new Note(id,name,note,date,desc,user,perm);
+                    oneNote.setLikes(database.likes(name));
+                    m_noteArrayList.add(oneNote);
                     cursor.moveToNext();
                 }
                 cursor.close();
@@ -181,9 +181,9 @@ public class  ViewPage extends AppCompatActivity {
                     String date = cursor.getString(cursor.getColumnIndex("DATE"));
                     String user = cursor.getString(cursor.getColumnIndex("USER"));
                     String perm = cursor.getString(cursor.getColumnIndex("PERM"));
-                    oneCustomer = new Customer(id,name,note,date,desc,user,perm);
-                    oneCustomer.setLikes(database.likes(name));
-                    m_customerArrayList.add(oneCustomer);
+                    oneNote = new Note(id,name,note,date,desc,user,perm);
+                    oneNote.setLikes(database.likes(name));
+                    m_noteArrayList.add(oneNote);
                     cursor.moveToNext();
                 }
                 cursor.close();
@@ -201,9 +201,9 @@ public class  ViewPage extends AppCompatActivity {
                     String date = cursor.getString(cursor.getColumnIndex("DATE"));
                     String user = cursor.getString(cursor.getColumnIndex("USER"));
                     String perm = cursor.getString(cursor.getColumnIndex("PERM"));
-                    oneCustomer = new Customer(id,name,note,date,desc,user,perm);
-                    oneCustomer.setLikes(database.likes(name));
-                    m_customerArrayList.add(oneCustomer);
+                    oneNote = new Note(id,name,note,date,desc,user,perm);
+                    oneNote.setLikes(database.likes(name));
+                    m_noteArrayList.add(oneNote);
                     cursor.moveToNext();
                 }
                 cursor.close();
@@ -223,9 +223,9 @@ public class  ViewPage extends AppCompatActivity {
                     String date = cursor.getString(cursor.getColumnIndex("DATE"));
                     String user = cursor.getString(cursor.getColumnIndex("USER"));
                     String perm = cursor.getString(cursor.getColumnIndex("PERM"));
-                    oneCustomer = new Customer(id,name,note,date,desc,user,perm);
-                    oneCustomer.setLikes(database.likes(name));
-                    m_customerArrayList.add(oneCustomer);
+                    oneNote = new Note(id,name,note,date,desc,user,perm);
+                    oneNote.setLikes(database.likes(name));
+                    m_noteArrayList.add(oneNote);
                     cursor.moveToNext();
                 }
                 cursor.close();

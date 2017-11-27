@@ -14,8 +14,8 @@ public class Log {
     //private String img;
 
     //I have provided a constructor so that it is easier to provide
-    //code such as new Customer(0,'RICHARD LOW','90883377');
-    //The command can create a Customer type object and at the same time fill the object's
+    //code such as new Note(0,'RICHARD LOW','90883377');
+    //The command can create a Note type object and at the same time fill the object's
     //properties to describe one customer information.
     public Log(int inId, String to, String from, String notes, String action, String time){//, String img){
         this.to=to;
