@@ -182,7 +182,8 @@ public class  ViewPage extends AppCompatActivity {
                     String user = cursor.getString(cursor.getColumnIndex("USER"));
                     String perm = cursor.getString(cursor.getColumnIndex("PERM"));
                     oneNote = new Note(id,name,note,date,desc,user,perm);
-                    oneNote.setLikes(database.likes(name));
+                    String ids=String.valueOf(id);
+                    oneNote.setLikes(database.likes(ids));
                     m_noteArrayList.add(oneNote);
                     cursor.moveToNext();
                 }
@@ -202,7 +203,8 @@ public class  ViewPage extends AppCompatActivity {
                     String user = cursor.getString(cursor.getColumnIndex("USER"));
                     String perm = cursor.getString(cursor.getColumnIndex("PERM"));
                     oneNote = new Note(id,name,note,date,desc,user,perm);
-                    oneNote.setLikes(database.likes(name));
+                    String ids=String.valueOf(id);
+                    oneNote.setLikes(database.likes(ids));
                     m_noteArrayList.add(oneNote);
                     cursor.moveToNext();
                 }
@@ -224,7 +226,8 @@ public class  ViewPage extends AppCompatActivity {
                     String user = cursor.getString(cursor.getColumnIndex("USER"));
                     String perm = cursor.getString(cursor.getColumnIndex("PERM"));
                     oneNote = new Note(id,name,note,date,desc,user,perm);
-                    oneNote.setLikes(database.likes(name));
+                    String ids=String.valueOf(id);
+                    oneNote.setLikes(database.likes(ids));
                     m_noteArrayList.add(oneNote);
                     cursor.moveToNext();
                 }

@@ -71,8 +71,8 @@ public class DbDataSource {
 
     public void insertLog(String from, String to, String note,String action, String time,int id) {
 
-        if (likes(note,from)>0 && action.equals("liked")){
-            m_database.execSQL("DELETE FROM " + DbHelper.TABLE2 + " WHERE " + DbHelper.COLUMN_FROM+"=\'"+from+"\' and "+DbHelper.COLUMN_TO+"=\'"+to+"\' and "+DbHelper.COLUMN_NOTE+"=\'"+note+"\' and "+DbHelper.COLUMN_ACTION+"=\'"+action+"\' ");
+        if (likes(id,from)>0 && action.equals("liked")){
+            m_database.execSQL("DELETE FROM " + DbHelper.TABLE2 + " WHERE " + DbHelper.COLUMN_ID+"="+String.valueOf(id)+" and "+DbHelper.COLUMN_ACTION+"=\'"+action+"\' ");
             //int success = m_database.delete(DbHelper.TABLE2,,new String[]{from,to,note,action});
         }else {
             m_database.beginTransaction();
@@ -105,10 +105,7 @@ public class DbDataSource {
         Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE+" where "+ DbHelper.COLUMN_PERM+" IS \'pu\'", null);
         return cursor;
     }
-    public Cursor selectComments(int I){
-        Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE3+" where "+ DbHelper.COLUMN_ID1+" IS \'"+I+"\'", null);
-        return cursor;
-    }
+
     public Cursor month(String k){
         Cursor cursor = m_database.rawQuery("SELECT * FROM " + DbHelper.TABLE+" WHERE ("+ DbHelper.COLUMN_DATE+" LIKE \'%"+k+"%\' )",null);
         return cursor;
@@ -151,7 +148,7 @@ public class DbDataSource {
     }
 
     public int likes(String user){
-        Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE2 +" where "+ DbHelper.COLUMN_NOTE+" IS \'" +user+"\' AND "+DbHelper.COLUMN_ACTION+" IS \'liked\'", null);
+        Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE2 +" where "+ DbHelper.COLUMN_ID+" IS \'" +user+"\' AND "+DbHelper.COLUMN_ACTION+" IS \'liked\'", null);
         cursor.moveToFirst();
         int k=0;
         while (!cursor.isAfterLast()) {
@@ -163,8 +160,8 @@ public class DbDataSource {
 
 
 
-    public int likes(String note,String user){
-        Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE2 +" where "+ DbHelper.COLUMN_NOTE+" IS \'" +note+"\' AND "+DbHelper.COLUMN_ACTION+" IS \'liked\' AND "+DbHelper.COLUMN_FROM+" IS \'"+user+"\'", null);
+    public int likes(int id,String user){
+        Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE2 +" where "+ DbHelper.COLUMN_ID+" IS \'" +String.valueOf(id)+"\' AND "+DbHelper.COLUMN_ACTION+" IS \'liked\' AND "+DbHelper.COLUMN_FROM+" IS \'"+user+"\'", null);
         cursor.moveToFirst();
         int k=0;
         while (!cursor.isAfterLast()) {

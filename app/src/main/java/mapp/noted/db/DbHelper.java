@@ -24,12 +24,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String COLUMN_NOTE = "NOTENAME";
     public static final String COLUMN_ACTION = "ACTION";
     public static final String COLUMN_TIME = "TIME";
-    public static final String TABLE3 ="CHAT";
-    //ID
 
-    public static final String COLUMN_COMMENT = "COMMENT";
-    //NOTE
-    //DATE
 
     public static final String DB_NAME = "noterinoo.db";
     private static final int DB_VER = 1;
@@ -55,13 +50,7 @@ public class DbHelper extends SQLiteOpenHelper {
             ", " + COLUMN_ACTION + " TEXT " +
             ", " + COLUMN_TIME + " TEXT )";
 
-    private static final String DB_CREATE3 = "CREATE TABLE "+ TABLE3+
-            " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT" +//chat id
-            ", " + COLUMN_ID1 + " INTEGER " +//NOTE ID
-            ", " + COLUMN_COMMENT + " TEXT " +//COMMENT
-            ", " + COLUMN_CREATOR + " TEXT " +//USER
-            ", " + COLUMN_NOTE + " TEXT " +//NOTE NAME
-            ", " + COLUMN_DATE + " TEXT )";//DATE
+
 //add note primary key in db2
 
     public DbHelper(Context context){
@@ -74,7 +63,6 @@ public class DbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(DB_CREATE);
         sqLiteDatabase.execSQL(DB_CREATE1);
         sqLiteDatabase.execSQL(DB_CREATE2);
-        sqLiteDatabase.execSQL(DB_CREATE3);
     }
 
     @Override
