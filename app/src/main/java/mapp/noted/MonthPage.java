@@ -123,37 +123,42 @@ public class MonthPage extends AppCompatActivity implements View.OnClickListener
                 break;
         }
     }
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add:
-                startActivityForResult(new Intent(MonthPage.this, AddNotes.class), 4);
+                startActivityForResult(new Intent(this, AddNotes.class), 4);
                 break;
             case R.id.logout:
-                startActivityForResult(new Intent(MonthPage.this, MainActivity.class), 4);
+                startActivityForResult(new Intent(this, MainActivity.class), 4);
                 break;
             case R.id.all:
-                Intent intent=new Intent(MonthPage.this, ViewPage.class);
+                Intent intent=new Intent(this, ViewPage.class);
                 intent.putExtra("VIEW", "ALL");
                 startActivityForResult(intent,5);
                 break;
             case R.id.search:
-                startActivityForResult(new Intent(MonthPage.this, Search.class), 4);
+                startActivityForResult(new Intent(this, Search.class), 4);
                 break;
             case R.id.recent:
-                startActivityForResult(new Intent(MonthPage.this, RecentPage.class), 4);
+                startActivityForResult(new Intent(this, RecentPage.class), 4);
                 break;
             case R.id.about:
-                startActivityForResult(new Intent(MonthPage.this, About.class),4);
+                startActivityForResult(new Intent(this, About.class),4);
                 break;
             case R.id.likes:
-                Intent intentS = new Intent(MonthPage.this, ViewPage.class);
+                Intent intentS = new Intent(this, ViewPage.class);
                 intentS.putExtra("VIEW", "LIKE");
                 startActivityForResult(intentS,5);
                 break;
             case R.id.month:
-                Intent intentMonth = new Intent(MonthPage.this, MonthPage.class);
+                Intent intentMonth = new Intent(this, MonthPage.class);
                 intentMonth.putExtra("VIEW", "MONTH");
                 startActivityForResult(intentMonth,5);
+                break;
+            case R.id.secret:
+                Intent intents = new Intent(this, ViewSecret.class);
+                startActivityForResult(intents,5);
                 break;
             case android.R.id.home:
                 Intent data = new Intent();
@@ -166,6 +171,6 @@ public class MonthPage extends AppCompatActivity implements View.OnClickListener
                 break;
         }
         return true;
-    }
+    }//End of onOptionsItemSelected(...)
 }
 

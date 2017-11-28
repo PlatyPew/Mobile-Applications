@@ -206,7 +206,7 @@ public class DbDataSource {
 
     public Cursor selectOneNote(String inId){
         Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE+" where "
-                + DbHelper.COLUMN_DATE+" IS \'" + inId+"\'", null);
+                + DbHelper.COLUMN_DATE+" LIKE \'%" + inId+"%\'", null);
         return cursor;
     }
 

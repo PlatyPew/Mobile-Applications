@@ -28,7 +28,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String TABLE3 ="SECRET";
 
 
-    public static final String DB_NAME = "noterinooonoo.db";
+    public static final String DB_NAME = "noterinooonooo.db";
     private static final int DB_VER = 1;
     private static final String DB_CREATE = "CREATE TABLE "+ TABLE+
             " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT" +

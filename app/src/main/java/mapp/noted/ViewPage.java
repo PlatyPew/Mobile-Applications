@@ -148,6 +148,10 @@ public class  ViewPage extends AppCompatActivity {
                 intentMonth.putExtra("VIEW", "MONTH");
                 startActivityForResult(intentMonth,5);
                 break;
+            case R.id.secret:
+                Intent intents = new Intent(this, ViewSecret.class);
+                startActivityForResult(intents,5);
+                break;
             case android.R.id.home:
                 Intent data = new Intent();
                 // add data to Intent
@@ -189,7 +193,7 @@ public class  ViewPage extends AppCompatActivity {
                     String user = cursor.getString(cursor.getColumnIndex("USER"));
                     String perm = cursor.getString(cursor.getColumnIndex("PERM"));
                     oneNote = new Note(id,name,note,date,desc,user,perm);
-                    oneNote.setLikes(database.likes(name));
+                    oneNote.setLikes(database.likes(String.valueOf(id)));
                     m_noteArrayList.add(oneNote);
                     cursor.moveToNext();
                 }

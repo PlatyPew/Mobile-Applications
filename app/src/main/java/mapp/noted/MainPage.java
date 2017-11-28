@@ -74,6 +74,7 @@ public class MainPage extends AppCompatActivity {
                         intent.putExtra("DESCRIPTION", desc);
                         intent.putExtra("DATE", date);
                         intent.putExtra("PERM", perm);
+                        intent.putExtra("USER", users);
 
                         startActivityForResult(intent,5);
                         break;
