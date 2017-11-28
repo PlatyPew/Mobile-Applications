@@ -25,7 +25,7 @@ public class UpdateNote extends AppCompatActivity {
     private String desc;
     private String date;
     private String perm;
-
+    private String time;
 
 
     @Override
@@ -47,6 +47,7 @@ public class UpdateNote extends AppCompatActivity {
         desc = getIntent().getStringExtra("DESCRIPTION");
         date = getIntent().getStringExtra("DATE");
         perm = getIntent().getStringExtra("PERM");
+
 
         //After collecting the data, the data is used to display inside
         //the correct controls.
@@ -82,7 +83,7 @@ public class UpdateNote extends AppCompatActivity {
                 String descee = descc.getText().toString();
 
                 //EditText datee= (EditText)findViewById(R.id.EditText_Date);
-                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+                DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss");
                 Date datee = new Date();
                 String dates = "Last edited on: "+dateFormat.format(datee);
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
@@ -102,12 +103,17 @@ public class UpdateNote extends AppCompatActivity {
 
 
                 String dateee = dateFormat.format(datee);
-                db.open();
-                db.insertLog(user,user,name,"liked",dateee,id);
-                db.close();
-                db.close();
+
+                db.insertLog(user,user,name,"updated",dateee,id);
+
 
                 finish();
+                if (perm.equals("pr")){
+                    Intent intentMonth = new Intent(UpdateNote.this,Secret.class);
+                    intentMonth.putExtra("TIEM",dateee);
+                    startActivityForResult(intentMonth,5);
+                }
+
             }
         });//end of setOnClickListener()
     }//End of onCreate

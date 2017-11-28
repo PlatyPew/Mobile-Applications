@@ -51,6 +51,7 @@ public class MainPage extends AppCompatActivity {
                 String perm= selectedNoteToUpdate.getPerm();
                 String users= selectedNoteToUpdate.getUser();
 
+
                 SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
                 String user= pref.getString("name","name");
                 DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
@@ -84,6 +85,7 @@ public class MainPage extends AppCompatActivity {
                         intent.putExtra("DESCRIPTION", desc);
                         intent.putExtra("DATE", date);
                         intent.putExtra("PERM", perm);
+
 
                         startActivityForResult(intent,5);
                         break;
@@ -149,6 +151,10 @@ public class MainPage extends AppCompatActivity {
                 Intent intentMonth = new Intent(this, MonthPage.class);
                 intentMonth.putExtra("VIEW", "MONTH");
                 startActivityForResult(intentMonth,5);
+                break;
+            case R.id.secret:
+                Intent intents = new Intent(this, ViewSecret.class);
+                startActivityForResult(intents,5);
                 break;
             case android.R.id.home:
                 Intent data = new Intent();

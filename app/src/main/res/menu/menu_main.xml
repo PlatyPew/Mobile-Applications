@@ -18,13 +18,15 @@
         android:title="Your Likes"/>
 
     <item android:id="@+id/recent"
-        android:title="Recently Viewed"/>
+        android:title="Recent Activities"/>
 
     <item android:id="@+id/about"
         android:title="About"/>
 
     <item android:id="@+id/logout"
         android:title="Logout"/>
+    <item android:id="@+id/secret"
+        android:title="View Secret"/>
 
 
 

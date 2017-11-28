@@ -3,87 +3,74 @@ package mapp.noted;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import mapp.noted.db.DbDataSource;
 
-public class AddNotes extends AppCompatActivity {
+public class Secret extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_note);
+        setContentView(R.layout.secret);
 
+        String view=getIntent().getStringExtra("TIEM");
+        byte[] data=null;
+        try {
+            data = view.getBytes("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        String base64 = Base64.encodeToString(data, Base64.DEFAULT);
+        TextView myAwesomeTextView = (TextView)findViewById(R.id.ID);
 
-        findViewById(R.id.Button_Save).setOnClickListener( new View.OnClickListener() {
+//in your OnCreate() method
+        System.out.println(base64);
+        myAwesomeTextView.setText("ID : "+base64);
+
+        findViewById(R.id.search).setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Use findViewById to find the textbox inside the activity.
                 //Then get the editTextName variable to represent/reference it.
                 //Once the editTextName successfully represent that textbox, I will
                 //use the getText() which belongs to the editTextName to grab the user input
-                EditText editTextName= (EditText)findViewById(R.id.EditText_Name);
+                EditText editTextName= (EditText)findViewById(R.id.EditText_search);
                 String name = editTextName.getText().toString();
-                if (name.equals("")) {
-                    name = "Untitled";
-                }
-                String perm ="pu";
-                EditText notee= (EditText)findViewById(R.id.EditText_note);
-                String note = notee.getText().toString();
-                if (note.equals("")) {
-                    note = "Empty like my soul";
-                }
-
-                EditText descc= (EditText)findViewById(R.id.EditText_Desc);
-                String desc = descc.getText().toString();
-                if (desc.equals("")) {
-                    desc = "No Description";
-                }
-
-                //EditText datee= (EditText)findViewById(R.id.EditText_Date);
-                DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss");
 
 
-                Date datee = new Date();
-                String dates = dateFormat.format(datee);
-
-
-                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
-                String user= pref.getString("name","name");
-                RadioButton rb1 = (RadioButton) findViewById(R.id.priv);
-                if(rb1.isChecked()){
-
-                    perm="pr";
-                }
-                String date="Created on: "+dates;
                 DbDataSource db = new DbDataSource(v.getContext());
-                Note newNote = new Note(0,name,note,date,desc,user,perm);
-                db.open();
-                db.insertCustomer(newNote);
 
-                db.insertLog(user,user,name,"created",date,0);
+
+
+                db.open();
+                String view=getIntent().getStringExtra("TIEM");
+                db.insertPassword(view,name);
+
                 Toast.makeText(v.getContext(), "Saved one note", Toast.LENGTH_SHORT).show();
                 db.close();
 
                 finish();
-                if (perm.equals("pr")){
-                    Intent intentMonth = new Intent(AddNotes.this, Secret.class);
-                    intentMonth.putExtra("TIEM",dates);
+               /* if (perm.equals("pr")){
+                    Intent intentMonth = new Intent(Secret.this, Secret.class);
+                    intentMonth.putExtra("ID", );
                     startActivityForResult(intentMonth,5);
-                }
-
+                }*/
             }
         });//end of setOnClickListener()
     }//End of onCreate
@@ -106,32 +93,32 @@ public class AddNotes extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add:
-                startActivityForResult(new Intent(AddNotes.this, AddNotes.class), 4);
+                startActivityForResult(new Intent(Secret.this, Secret.class), 4);
                 break;
             case R.id.logout:
-                startActivityForResult(new Intent(AddNotes.this, MainActivity.class), 4);
+                startActivityForResult(new Intent(Secret.this, MainActivity.class), 4);
                 break;
             case R.id.all:
-                Intent intent=new Intent(AddNotes.this, ViewPage.class);
+                Intent intent=new Intent(Secret.this, ViewPage.class);
                 intent.putExtra("VIEW", "ALL");
                 startActivityForResult(intent,5);
                 break;
             case R.id.search:
-                startActivityForResult(new Intent(AddNotes.this, Search.class), 4);
+                startActivityForResult(new Intent(Secret.this, Search.class), 4);
                 break;
             case R.id.recent:
-                startActivityForResult(new Intent(AddNotes.this, RecentPage.class), 4);
+                startActivityForResult(new Intent(Secret.this, RecentPage.class), 4);
                 break;
             case R.id.about:
-                startActivityForResult(new Intent(AddNotes.this, About.class),4);
+                startActivityForResult(new Intent(Secret.this, About.class),4);
                 break;
             case R.id.likes:
-                Intent intentS = new Intent(AddNotes.this, ViewPage.class);
+                Intent intentS = new Intent(Secret.this, ViewPage.class);
                 intentS.putExtra("VIEW", "LIKE");
                 startActivityForResult(intentS,5);
                 break;
             case R.id.month:
-                Intent intentMonth = new Intent(AddNotes.this, MonthPage.class);
+                Intent intentMonth = new Intent(Secret.this, MonthPage.class);
                 intentMonth.putExtra("VIEW", "MONTH");
                 startActivityForResult(intentMonth,5);
                 break;

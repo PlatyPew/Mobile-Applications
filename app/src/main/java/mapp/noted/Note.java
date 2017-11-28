@@ -11,6 +11,7 @@ public class Note {
     private String name;
     private String notes;
     private String date;
+
     private String user;
     private String perm;
     private int likes;
@@ -20,6 +21,7 @@ public class Note {
     //code such as new Note(0,'RICHARD LOW','90883377');
     //The command can create a Note type object and at the same time fill the object's
     //properties to describe one customer information.
+
     public Note(int inId, String inName, String notes, String date, String desc, String user, String perm){//, String img){
         this.name=inName;
         this.id = inId;
@@ -28,6 +30,8 @@ public class Note {
         this.desc = desc;
         this.user=user;
         this.perm=perm;
+
+
         //this.img = img;
 
     }
@@ -63,6 +67,8 @@ public class Note {
     public void setDate(String date) {
         this.date = date;
     }
+
+
 
     public String getNote() {
         return this.notes;

@@ -52,6 +52,7 @@ public class DbDataSource {
         } finally {
             m_database.endTransaction();
         }
+
     }
 
     public boolean insertUser(String user, String password) {
@@ -65,6 +66,19 @@ public class DbDataSource {
             m_database.setTransactionSuccessful();
             return true;
         }catch( Exception e){return false;} finally {
+            m_database.endTransaction();
+        }
+    }
+    public void insertPassword(String id, String password) {
+        m_database.beginTransaction();
+        try {
+            ContentValues values = new ContentValues();
+            values.put(DbHelper.COLUMN_ID, id);
+            values.put(DbHelper.COLUMN_PASSWORD, password);
+            m_database.insert(DbHelper.TABLE3, null, values);
+
+            m_database.setTransactionSuccessful();
+        }finally {
             m_database.endTransaction();
         }
     }
@@ -97,6 +111,11 @@ public class DbDataSource {
     public Cursor login(String user, String password) {
         Cursor cursor = m_database.rawQuery("SELECT * FROM " + DbHelper.TABLE1+" where "
                 + DbHelper.COLUMN_CREATOR+" IS \'" +user+"\' AND "+ DbHelper.COLUMN_PASSWORD+" IS \'" +password+"\';", null);
+        return cursor;
+    }
+    public Cursor check(String user, String password) {
+        Cursor cursor = m_database.rawQuery("SELECT * FROM " + DbHelper.TABLE3+" where "
+                + DbHelper.COLUMN_ID+" IS \'" +user+"\' AND "+ DbHelper.COLUMN_PASSWORD+" IS \'" +password+"\';", null);
         return cursor;
     }
 
@@ -185,9 +204,9 @@ public class DbDataSource {
         return cursor;
     }
 
-    public Cursor selectOneCustomer(int inId){
+    public Cursor selectOneNote(String inId){
         Cursor cursor = m_database.rawQuery("Select * from " + DbHelper.TABLE+" where "
-                + DbHelper.COLUMN_ID+" = " + inId, null);
+                + DbHelper.COLUMN_DATE+" IS \'" + inId+"\'", null);
         return cursor;
     }
 
