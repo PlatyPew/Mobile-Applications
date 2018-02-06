@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scrollView_AddCustomerForm"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="fill_parent"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            app:srcCompat="@drawable/notepad"
+            android:paddingTop="30dp"
+            android:paddingBottom="20dp"/>
+
+        <EditText
+            android:id="@+id/EditText_Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            android:textSize="10pt">
+        </EditText>
+
+        <EditText
+            android:id="@+id/EditText_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:textSize="10pt"
+            android:inputType="textPassword">
+        </EditText>
+
+
+
+        <Button
+            android:id="@+id/Button_login"
+            android:layout_height="wrap_content"
+            android:text="Sign-in"
+            android:layout_width="match_parent"
+             >
+    </Button>
+        <Button
+            android:id="@+id/Button_signup"
+            android:layout_height="wrap_content"
+
+            android:layout_width="match_parent"
+            android:text="Sign-up"
+             >
+        </Button>
+    </LinearLayout>
+</ScrollView>

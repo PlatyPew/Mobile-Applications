@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/home"
+        android:title="Home"/>
+
+    <item android:id="@+id/search"
+        android:title="Search Notes"/>
+
+    <item android:id="@+id/add"
+        android:title="Add Notes"/>
+
+    <item android:id="@+id/all"
+        android:title="View All"/>
+
+    <item android:id="@+id/month"
+        android:title="Sort By Month"/>
+
+    <item android:id="@+id/likes"
+        android:title="Your Likes"/>
+
+    <item android:id="@+id/recent"
+        android:title="Recent Activities"/>
+
+    <item android:id="@+id/about"
+        android:title="About"/>
+
+    <item android:id="@+id/secret"
+        android:title="View Private Notes"/>
+
+    <item android:id="@+id/logout"
+        android:title="Logout"/>
+
+
+
+
+</menu>
